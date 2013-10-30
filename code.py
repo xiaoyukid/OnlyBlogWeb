@@ -2,11 +2,11 @@
 __author__ = 'Administrator'
 
 import web
-from views.index import Index
+from views.index import index
 
 
 urls = (
-    "/.*", Index
+    "/.*", index
 )
 
 if __name__ == "__main__":

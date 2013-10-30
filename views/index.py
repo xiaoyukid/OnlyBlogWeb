@@ -1,19 +1,19 @@
 #coding=utf-8
 __author__ = 'Administrator'
 import web
-from utils.db_util import DBUtil
+
+import utils
 
 
 render = web.template.render("templates/")
 
 
-class Index:
+class index:
     def __init__(self):
         pass
 
     def GET(self):
-        posts = DBUtil.get_object('post')
+        a = utils.common()
 
-        for p in posts:
-            a = p.title
+
         return render.index()
