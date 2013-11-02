@@ -9,6 +9,6 @@ PORT = 6379
 DB = 0
 
 urls = (
-    "^/$", index,
-    "/get_posts/(.*)", posts
+    "/favicon.ico", faviconICO,
+    "^/(.*)$", index
 )

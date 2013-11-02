@@ -13,17 +13,15 @@ class index:
     def __init__(self):
         pass
 
-    def GET(self):
-        return render.index()
-
-
-class posts:
-    post_service = None
-
-    def __init__(self):
-        self.post_service = PostService()
-
     def GET(self, page):
-        list_post = self.post_service.get_posts(page)
+        if page is None or page == '':
+            page = 1
 
-        return list_post
+        post_list = PostService().get_posts(page)
+        return render.index(post_list)
+
+
+class faviconICO(object):
+   def GET(self):
+
+       return web.seeother('/static/images/favicon.ico')

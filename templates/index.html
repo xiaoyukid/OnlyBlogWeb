@@ -1,3 +1,4 @@
+$def with (post_list)
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,9 +7,24 @@
     <title>首页</title>
     <script type="text/javascript" src="/static/js/jquery.js"></script>
     <script type="text/javascript" src="/static/js/util.js"></script>
-    <script type="text/javascript" src="/static/js/onlyblog.js"></script>
+    <script type="text/javascript" src="/static/js/blog.js"></script>
+    <link type="text/css" rel="stylesheet" href="/static/css/blog.css">
 </head>
 <body>
-
+    <div class="wrapper">
+        $for post in post_list:
+        <div class="post_wrapper">
+            <div class="post post_title">
+                <a href="#">$:post['title']</a>
+            </div>
+            <div class="post post_content">
+                $:post['content']
+            </div>
+            <div class="post post_footer">
+            标签:test &nbsp;&nbsp; 所属:testclsss
+            </div>
+        </div>
+        <br>
+    </div>
 </body>
 </html>

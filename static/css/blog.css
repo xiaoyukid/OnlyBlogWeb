@@ -1,0 +1,48 @@
+html body{
+    background-color: #f5f5f5;
+    color: #444444;
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    color: #21759b;
+    text-decoration: none;
+}
+
+a:hover{
+    color: #444444;
+}
+
+div{
+    background-color: white;
+}
+
+.wrapper{
+    padding: 30px;
+    margin: auto;
+    width: 940px;
+}
+
+.post_wrapper{
+
+}
+
+.post{
+    padding: 10px;
+    line-height: 24px;
+}
+
+.post_title{
+    font-size: 22px;
+
+}
+
+.post_content{
+}
+
+.post_footer{
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 13px;
+    color: gray;
+}
