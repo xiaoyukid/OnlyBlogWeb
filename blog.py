@@ -1,8 +1,9 @@
 #coding=utf-8
+import configs
+
 __author__ = 'Administrator'
 
 import web
-from utils import configs
 
 urls = configs.urls
 
