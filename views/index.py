@@ -1,23 +1,26 @@
+#!/usr/bin/env python
 #coding=utf-8
-__author__ = 'Administrator'
+__author__ = 'tonghs'
+'''
+视图
+'''
+
 import web
 
 import utils
 from services.post_service import PostService
 
 
-render = web.template.render("templates/")
+render = web.template.render('templates/')
 
 
 class index:
-    def __init__(self):
-        pass
-
     def GET(self, page):
         if page is None or page == '':
             page = 1
 
         post_list = PostService().get_posts(page)
+
         return render.index(post_list)
 
 
