@@ -2,12 +2,9 @@
 __author__ = 'Administrator'
 
 import web
-from views.index import index
+from utils import configs
 
-
-urls = (
-    "/.*", index
-)
+urls = configs.urls
 
 if __name__ == "__main__":
     app = web.application(urls, globals())

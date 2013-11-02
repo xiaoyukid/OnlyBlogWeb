@@ -1,17 +1,20 @@
 #coding=utf-8
 __author__ = 'Administrator'
-import pymongo
+import redis
+from configs import *
 
 
 class DBUtil:
+    r = None
+
     def __init__(self):
-        pass
+        self.r = redis.Redis(host=HOST, post=PORT, db=DB)
 
-    @staticmethod
-    def get_object(obj_name):
-        conn = pymongo.Connection('localhost', 27017)
-        db = conn.test
-        obj = db.post
-        objs = obj.find()
+    def get_object_ids(self, obj_name, start, end):
+        list_ids = self.r.lrange(obj_name + ':ids', start, end)
+        return list_ids
 
-        return objs
+    def get_object_by_id(self, obj_name, id):
+        obj = self.r.hgetall(obj_name + ":" + id)
+
+        return obj
