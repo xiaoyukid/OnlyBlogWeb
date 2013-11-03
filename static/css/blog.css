@@ -70,12 +70,11 @@ div{
 }
 
 .header{
-    background-color: #dddddd;
+    border-bottom: 1px solid #f5f5f5;
     padding: 10px 40px 20px 40px;
 }
 
 .header .name{
-    background-color: #dddddd;
     font-size: 24px;
     font-weight: bold;
     padding: 10px 0;
