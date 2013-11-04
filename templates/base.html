@@ -1,0 +1,29 @@
+$def with (content)
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="仅仅是一个博客">
+    <title>$content.title</title>
+    <script type="text/javascript" src="/static/js/jquery.js"></script>
+    <script type="text/javascript" src="/static/js/util.js"></script>
+    <script type="text/javascript" src="/static/js/blog.js"></script>
+    <link type="text/css" rel="stylesheet" href="/static/css/blog.css">
+</head>
+<body>
+    <div class="top">&nbsp;</div>
+    <div class="wrapper">
+        <div class="header">
+            <div class="name">$content.blog_name</div>
+            $content.blog_sub_title
+        </div>
+        $:content
+    </div>
+    <br>
+    <div class="footer">
+        <a href="https://github.com/tonghuashuai/OnlyBlogWeb">
+            源自 Python web.py Redis
+        </a>
+    </div>
+</body>
+</html>

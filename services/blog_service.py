@@ -21,7 +21,7 @@ class BlogService:
         """
         return self.db_util.get_hash_attr('blog:ids', config_name)
 
-    def get_blog_name_and_sub_title(self):
+    def get_blog(self):
         """
         获取博客名和副标题
         """

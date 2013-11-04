@@ -1,60 +1,36 @@
 $def with (params)
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="description" content="仅仅是一个博客">
-    <title>$params['post'].title</title>
-    <script type="text/javascript" src="/static/js/jquery.js"></script>
-    <script type="text/javascript" src="/static/js/util.js"></script>
-    <link type="text/css" rel="stylesheet" href="/static/css/blog.css">
-</head>
-<body>
-    <div class="top">&nbsp;</div>
-    <div class="wrapper">
-
-        <div class="header">
-
-            <div class="name">$params['blog'].name</div>
-            $params['blog'].sub_title
+$var title:
+    $params.title
+$var blog_name:
+    $params.blog.name
+$var blog_sub_title:
+    $params.blog.sub_title
+<div class="menu">
+    <ul>
+        <li>
+            <a href="/">首页</a>
+        </li>
+        $for menu in params.menu_list:
+            <li>
+                <a href="/category/$menu">$menu</a>
+            </li>
+        <li>
+            <a href="/category/more">所有分类</a>
+        </li>
+    </ul>
+    <div class="clear"></div>
+</div>
+<br>
+<div>
+    <div class="post_wrapper">
+        <div class="post post_title">
+            <a href="/post/$params.post.id">$:params.post.title</a>
         </div>
-        <div class="menu">
-            <ul>
-                <li>
-                    <a href="/">首页</a>
-                </li>
-                $for menu in params['menu_list']:
-                    <li>
-                        <a href="/category/$menu">$menu</a>
-                    </li>
-
-                <li>
-                    <a href="/category/more">所有分类</a>
-                </li>
-            </ul>
-            <div class="clear"></div>
+        <div class="post post_content">
+            $:params.post.content
         </div>
-        <br>
-
-        <div>
-            <div class="post_wrapper">
-                <div class="post post_title">
-                    <a href="/post/$params['post'].id">$:params['post'].title</a>
-                </div>
-                <div class="post post_content">
-                    $:params['post'].content
-                </div>
-                <div class="post post_footer_no_border">
-                标签:test &nbsp;&nbsp; 所属:<a href="/category/$$params['post'].category">$params['post'].category</a>
-                </div>
-            </div>
+        <div class="post post_footer_no_border">
+        标签:test &nbsp;&nbsp; 所属:<a href="/category/$$params.post.category">$params.post.category</a>
         </div>
     </div>
-    <br>
-    <div class="footer">
-        <a href="https://github.com/tonghuashuai/OnlyBlogWeb">
-            源自 Python web.py Redis
-        </a>
-    </div>
-</body>
-</html>
+</div>
