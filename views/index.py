@@ -10,7 +10,6 @@ __author__ = 'tonghs'
 视图
 '''
 
-
 render = web.template.render('templates/', base='base')
 
 

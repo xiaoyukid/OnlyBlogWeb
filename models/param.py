@@ -17,16 +17,15 @@ class Param:
     menu_list = None
 
     def __init__(self, post=None, post_list=None, title=None):
+        #博客相关信息
         self.blog = BlogService().get_blog()
-        self.menu_list = menu_list = CategoryService().get_menus()
-
+        #菜单列表
+        self.menu_list = CategoryService().get_menus()
         self.post = post
         self.post_list = post_list
+        #页面标题
         if title is None:
             blog = BlogService().get_blog()
             self.title = blog.name + " | " + blog.sub_title
-
         else:
             self.title = title
-
-
