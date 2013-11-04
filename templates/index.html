@@ -23,7 +23,7 @@ $def with (params)
             <ul>
                 $for menu in params['menu_list']:
                 <li>
-                    <a href="/menu/$menu.id">$menu.title</a>
+                    <a href="/menu/$menu.title">$menu.title</a>
                 </li>
             </ul>
             <div class="clear"></div>
@@ -38,7 +38,7 @@ $def with (params)
                 $:post.content
             </div>
             <div class="post post_footer">
-            标签:test &nbsp;&nbsp; 所属:testclsss
+            标签:test &nbsp;&nbsp; 所属:$post.category
             </div>
         </div>
         <br>

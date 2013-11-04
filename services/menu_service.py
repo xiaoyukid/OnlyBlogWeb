@@ -23,12 +23,11 @@ class MenuService:
         start = (int(page) - 1) * int(configs.PAGE_SIZE)
         end = int(page) * int(configs.PAGE_SIZE) - 1
 
-        list_ids = self.db_util.get_object_ids('menu', start, end)
+        dic_menus = self.db_util.get_list_objects('menu', start, end)
 
         list_menu = []
-        for menu_id in list_ids:
-            menu = self.db_util.get_str_obj_by_id('menu', menu_id)
-            menu = Menu(menu_id, menu)
+        for menu in dic_menus:
+            menu = Menu(menu)
             list_menu.append(menu)
 
         return list_menu

@@ -7,9 +7,7 @@ __author__ = 'tonghs'
 
 
 class Menu:
-    id = None
     title = None
 
-    def __init__(self, id_, title_):
-        self.id = id_
+    def __init__(self, title_):
         self.title = title_

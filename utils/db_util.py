@@ -15,11 +15,11 @@ class DBUtil:
     def __init__(self):
         self.r = redis.Redis(host=configs.HOST, port=configs.PORT, db=configs.DB)
 
-    def get_object_ids(self, obj_name, start, end):
+    def get_list_objects(self, obj_name, start, end):
         """
-        获取对象ID列表
+        获取对象列表
         """
-        list_ids = self.r.lrange(obj_name + ':ids', start, end)
+        list_ids = self.r.lrange(obj_name, start, end)
         return list_ids
 
     def get_hash_obj_by_id(self, obj_name, id):
