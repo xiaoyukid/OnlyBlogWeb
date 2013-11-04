@@ -46,7 +46,12 @@ div{
 }
 
 .post_footer{
-    /*border-bottom: 1px solid #f5f5f5;*/
+    border-bottom: 1px solid #f5f5f5;
+    font-size: 13px;
+    color: gray;
+}
+
+.post_footer_no_border{
     font-size: 13px;
     color: gray;
 }
@@ -83,6 +88,13 @@ div{
 .top{
     background-color: black;
     height: 5px;
+}
+
+.pager{
+    height: 30px;
+    font-size: 13px;
+    line-height: 30px;
+    text-align: center;
 }
 
 .footer{

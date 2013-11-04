@@ -4,10 +4,9 @@ $def with (params)
 <head>
     <meta charset="utf-8">
     <meta name="description" content="仅仅是一个博客">
-    <title>$params['blog'].name | $params['blog'].sub_title</title>
+    <title>$params['post'].title</title>
     <script type="text/javascript" src="/static/js/jquery.js"></script>
     <script type="text/javascript" src="/static/js/util.js"></script>
-    <script type="text/javascript" src="/static/js/blog.js"></script>
     <link type="text/css" rel="stylesheet" href="/static/css/blog.css">
 </head>
 <body>
@@ -36,24 +35,21 @@ $def with (params)
             <div class="clear"></div>
         </div>
         <br>
-        $for post in params['post_list']:
+
+        <div>
             <div class="post_wrapper">
                 <div class="post post_title">
-                    <a href="/post/$post.id">$:post.title</a>
+                    <a href="/post/$params['post'].id">$:params['post'].title</a>
                 </div>
                 <div class="post post_content">
-                    $:post.content
+                    $:params['post'].content
                 </div>
-                <div class="post post_footer">
-                标签:test &nbsp;&nbsp; 所属:<a href="/category/$post.category">$post.category</a>
+                <div class="post post_footer_no_border">
+                标签:test &nbsp;&nbsp; 所属:<a href="/category/$$params['post'].category">$params['post'].category</a>
                 </div>
             </div>
-        <div class="pager">
-            <a href="/page/2">下一页</a>
-            <a href="/page/1">上一页</a>
         </div>
     </div>
-
     <br>
     <div class="footer">
         <a href="https://github.com/tonghuashuai/OnlyBlogWeb">

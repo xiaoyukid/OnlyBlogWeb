@@ -4,7 +4,7 @@ $def with (params)
 <head>
     <meta charset="utf-8">
     <meta name="description" content="仅仅是一个博客">
-    <title>$params['blog'].name | $params['blog'].sub_title</title>
+    <title>$params['name']</title>
     <script type="text/javascript" src="/static/js/jquery.js"></script>
     <script type="text/javascript" src="/static/js/util.js"></script>
     <script type="text/javascript" src="/static/js/blog.js"></script>
@@ -49,8 +49,8 @@ $def with (params)
                 </div>
             </div>
         <div class="pager">
-            <a href="/page/2">下一页</a>
-            <a href="/page/1">上一页</a>
+            <a href="/category/$params['name']/page/2">下一页</a>
+            <a href="/category/$params['name']/page/1">上一页</a>
         </div>
     </div>
 

@@ -33,3 +33,12 @@ class PostService:
             list_post.append(post)
 
         return list_post
+
+    def get_post(self, post_id):
+        """
+        根据ID获取post
+        """
+        dic_post = self.db_util.get_hash_obj_by_id('post', post_id)
+        post = Post(post_id, dic_post['title'], dic_post['content'], dic_post['category'])
+
+        return post

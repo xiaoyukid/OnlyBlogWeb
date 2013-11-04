@@ -16,5 +16,9 @@ DB = 0
 
 urls = (
     '/favicon.ico', faviconICO,
-    '^/(.*)$', index
+    '/', index,
+    '/page/(.*)', index,
+    '/post/(.*)', post,
+    '/category/(.*)/page/(.*)', category,
+    '/category/(.*)', category
 )
