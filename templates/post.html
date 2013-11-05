@@ -24,13 +24,13 @@ $var blog_sub_title:
 <div>
     <div class="post_wrapper">
         <div class="post post_title">
-            <a href="/post/$params.post.id">$:params.post.title</a>
+            <a href="/post/$params.post['id']">$:params.post['title']</a>
         </div>
         <div class="post post_content">
-            $:params.post.content
+            $:params.post['content']
         </div>
         <div class="post post_footer_no_border">
-        标签:test &nbsp;&nbsp; 所属:<a href="/category/$$params.post.category">$params.post.category</a>
+        标签:test &nbsp;&nbsp; 所属:<a href="/category/$params.post['category']">$params.post['category']</a>
         </div>
     </div>
 </div>

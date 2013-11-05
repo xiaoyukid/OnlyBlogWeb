@@ -12,7 +12,11 @@ $def with (content)
 </head>
 <body>
     <div class="top">&nbsp;</div>
+
     <div class="wrapper">
+        <div id="gotop" onclick="goTop()">
+          ↑
+        </div>
         <div class="header">
             <div class="name">$content.blog_name</div>
             $content.blog_sub_title
@@ -22,7 +26,7 @@ $def with (content)
     <br>
     <div class="footer">
         <a href="https://github.com/tonghuashuai/OnlyBlogWeb">
-            源自 Python web.py Redis
+            基于 Python web.py Redis
         </a>
     </div>
 </body>

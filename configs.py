@@ -17,8 +17,19 @@ DB = 0
 urls = (
     '/favicon.ico', faviconICO,
     '/', index,
-    '/page/(.*)', index,
-    '/post/(.*)', post,
-    '/category/(.*)/page/(.*)', category,
-    '/category/(.*)', category
+    '/page/(\d+)/(\d+)/', index,
+    '/page/(\d+)/(\d+)', index,
+    '/page/(\d+)/', index,
+    '/page/(\d+)', index,
+
+    '/post/(\d+)/', post,
+    '/post/(\d+)', post,
+
+    '/category/(.*)/page/(\d+)/(\d+)/', category,
+    '/category/(.*)/page/(\d+)/(\d+)', category,
+    '/category/(.*)/page/(\d+)/', category,
+    '/category/(.*)/page/(\d+)', category,
+    '/category/(.*)/', category,
+    '/category/(.*)', category,
+
 )

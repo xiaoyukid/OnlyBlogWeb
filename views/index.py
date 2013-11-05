@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 #coding=utf-8
 import web
+import json
 from models.param import Param
-from services.blog_service import BlogService
 from services.category_service import CategoryService
 from services.post_service import PostService
 __author__ = 'tonghs'
@@ -14,11 +14,13 @@ render = web.template.render('templates/', base='base')
 
 
 class index:
-    def GET(self, page=1):
+    def GET(self, page=1, ret_type=0):
         post_list = PostService().get_posts(page)
-        params = Param(post_list=post_list)
-
-        return render.index(params)
+        params = Param(current_page=int(page), post_list=post_list)
+        if ret_type:
+            return json.dumps(post_list)
+        else:
+            return render.index(params)
 
 
 class faviconICO(object):
@@ -29,14 +31,16 @@ class faviconICO(object):
 class post:
     def GET(self, post_id):
         post = PostService().get_post(post_id)
-        params = Param(post=post, title=post.title)
+        params = Param(post=post, title=post['title'])
 
         return render.post(params)
 
 
 class category:
-    def GET(self, name, page=1):
+    def GET(self, name, page=1, ret_type=0):
         post_list = CategoryService().get_post_by_category(name, page)
-        params = Param(post_list=post_list, title=name)
-
-        return render.category(params)
+        params = Param(current_page=int(page), post_list=post_list, title=name)
+        if ret_type:
+            return json.dumps(post_list)
+        else:
+            return render.category(params)

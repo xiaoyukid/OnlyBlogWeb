@@ -8,7 +8,6 @@ __author__ = 'tonghs'
 
 from utils.db_util import DBUtil
 import configs
-from models.post import Post
 
 
 class PostService:
@@ -29,8 +28,8 @@ class PostService:
         list_post = []
         for post_id in list_ids:
             dic_post = self.db_util.get_hash_obj_by_id('post', post_id)
-            post = Post(post_id, dic_post['title'], dic_post['content'], dic_post['category'])
-            list_post.append(post)
+            dic_post['id'] = post_id
+            list_post.append(dic_post)
 
         return list_post
 
@@ -39,6 +38,6 @@ class PostService:
         根据ID获取post
         """
         dic_post = self.db_util.get_hash_obj_by_id('post', post_id)
-        post = Post(post_id, dic_post['title'], dic_post['content'], dic_post['category'])
+        dic_post['id'] = post_id
 
-        return post
+        return dic_post

@@ -1,3 +1,8 @@
+$(document).ready(function(){
+    resize();
+    $(window).resize(resize);
+});
+
 function showLoad(tipInfo) {
     if ($("#tipDiv").size() == 0){
         var eTip = document.createElement('div');
@@ -27,35 +32,15 @@ function closeLoad() {
 }
 
 
-function setHeightAndWidth(){
-    var height = $('html').height() - $('.header').height() - 30;
-    $('#content_container').height(height);
-
-    $("#tipDiv").css('left', ($('html').width() - 170) / 2 + 'px');
-}
-
-function keyboardHandler(keyCode, fun){
-    if (event.keyCode == keyCode){
-        fun();
+function resize(){
+    var bottom = $(".footer").height() + 17;
+    if ($(window).height() > $('html').height()){
+        bottom += $(window).height() - $('html').height();
     }
-}
 
-function ajaxRequest(url, fun, funErr){
-     $.ajax({
-        url: url,
-        error: funErr != null ? funErr : showErr,
-        success: fun
-    });
-}
-
-function ajaxRequestPost(url, data, fun, funErr){
-     $.ajax({
-        type: 'POST',
-        data: data,
-        url: url,
-        error: funErr != null ? funErr : showErr,
-        success: fun
-    });
+    var left = ($('html').width() - 940) / 2 + 940;
+    $('#gotop').css('left', left);
+    $('#gotop').css('bottom', bottom);
 }
 
 function showErr(req, msg, errorThrown){
@@ -130,3 +115,7 @@ jQuery.cookie = function(name, value, options) {
             return cookieValue;
         }
 };
+
+function goTop(){
+    $('body').animate({scrollTop: '0px'}, 100);
+}
