@@ -32,4 +32,10 @@ urls = (
     '/category/(.*)/', category,
     '/category/(.*)', category,
 
+    '/tag/(.*)/page/(\d+)/(\d+)/', tag,
+    '/tag/(.*)/page/(\d+)/(\d+)', tag,
+    '/tag/(.*)/page/(\d+)/', tag,
+    '/tag/(.*)/page/(\d+)', tag,
+    '/tag/(.*)/', tag,
+    '/tag/(.*)', tag
 )

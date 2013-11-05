@@ -5,11 +5,11 @@ $(document).ready(function(){
 
 });
 
-function getNext(page){
+function getNext(page, url){
     var next = page + 1;
     $('#pager').html('正在加载...');
     $.ajax({
-        url: '/page/' + next + '/1',
+        url: url + next + '/1',
         error: showErr,
         success: function(data){
             var arrObj = JSON.parse(data);
@@ -44,7 +44,7 @@ function getNext(page){
                     $('#post').append(post_wrapper);//将父div添加到页面中
                 }
                 $('#pager').html('下一页');
-                $('#pager').attr('onclick', 'getNext(' + next + ')');
+                $('#pager').attr('onclick', 'getNext(' + next + ', "' + url + '")');
             }
 
         }

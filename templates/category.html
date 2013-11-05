@@ -22,6 +22,7 @@ $var blog_sub_title:
     <div class="clear"></div>
 </div>
 <br>
+<div id="post">
 $for post in params.post_list:
     <div class="post_wrapper">
         <div class="post post_title">
@@ -31,9 +32,10 @@ $for post in params.post_list:
             $:post['content']
         </div>
         <div class="post post_footer">
-            标签:test &nbsp;&nbsp; 所属:<a href="/category/$post['category']">$post['category']</a>
+            标签:<a href="/tag/$post['tag']">$post['tag']</a> &nbsp;&nbsp; 所属:<a href="/category/$post['category']">$post['category']</a>
         </div>
     </div>
-<div class="pager">
-    <a href="/category/$params.title/page/$(params.current_page + 1)">下一页</a>
+</div>
+<div id="pager" class="pager" onclick="getNext($params.current_page, '/category/$params.special/page/')">
+    下一页
 </div>

@@ -10,17 +10,17 @@ __author__ = 'tonghs'
 '''
 
 
-class CategoryService:
+class TagService:
     db_util = None
 
     def __init__(self):
         self.db_util = DBUtil()
 
-    def get_menus(self):
+    def get_tags(self):
         """
-        获取所有菜单
+        获取所有标签
         """
-        dic_menus = self.db_util.get_list_objects('categorys', 0, 5)
+        dic_menus = self.db_util.get_list_objects('tags', 0, 5)
 
         list_menu = []
         for menu in dic_menus:
@@ -28,14 +28,14 @@ class CategoryService:
 
         return list_menu
 
-    def get_post_by_category(self, name, page):
+    def get_post_by_tag(self, name, page):
         """
-        获取分类下所有文章
+        获取该标签下所有文章
         """
         start = (int(page) - 1) * int(configs.PAGE_SIZE)
         end = int(page) * int(configs.PAGE_SIZE) - 1
 
-        list_post_ids = self.db_util.get_list_objects('category:' + name, start, end)
+        list_post_ids = self.db_util.get_list_objects('tag:' + name, start, end)
 
         list_post = []
         for id in list_post_ids:

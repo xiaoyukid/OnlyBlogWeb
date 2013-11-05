@@ -33,7 +33,7 @@ function closeLoad() {
 
 
 function resize(){
-    var bottom = $(".footer").height() + 17;
+    var bottom = $(".footer").height() + 16;
     if ($(window).height() > $('html').height()){
         bottom += $(window).height() - $('html').height();
     }
@@ -117,5 +117,5 @@ jQuery.cookie = function(name, value, options) {
 };
 
 function goTop(){
-    $('body').animate({scrollTop: '0px'}, 100);
+    $('body').animate({scrollTop: '0px'}, 300);
 }
