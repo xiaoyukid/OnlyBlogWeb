@@ -119,3 +119,15 @@ jQuery.cookie = function(name, value, options) {
 function goTop(){
     $('body').animate({scrollTop: '0px'}, 300);
 }
+
+function search(){
+    if (event.keyCode == 13){
+        var keyword = $('#txtKeyword').val();
+        var localUrl = window.location.href;
+        var site = localUrl.substr(0, localUrl.indexOf('/', 8));
+        var q = 'site:' + site + ' ' + keyword;
+        var url = 'http://www.google.com.hk/search?q=' + q;
+        window.open(url);
+    }
+
+}

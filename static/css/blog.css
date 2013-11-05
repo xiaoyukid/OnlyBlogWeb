@@ -48,7 +48,7 @@ div{
 }
 
 .post_title{
-    font-size: 22px;
+    font-size: 20px;
 
 }
 
@@ -92,7 +92,23 @@ div{
 .header .name{
     font-size: 24px;
     font-weight: bold;
+    margin-bottom: 5px;
     padding: 10px 0;
+}
+
+.header .left_header{
+    float: left;
+}
+
+.header .right_header{
+    float: right;
+    margin-top: 35px;
+}
+
+.header .right_header input{
+    border: 1px solid #dddddd;
+    padding: 5px;
+    width: 200px;
 }
 
 .top{

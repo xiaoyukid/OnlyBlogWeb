@@ -18,8 +18,14 @@ $def with (content)
           ↑
         </div>
         <div class="header">
-            <div class="name">$content.blog_name</div>
-            $content.blog_sub_title
+            <div class="left_header">
+                <div class="name">$content.blog_name</div>
+                $content.blog_sub_title
+            </div>
+            <div class="right_header">
+                <input id="txtKeyword" onkeyup="search()"/>
+            </div>
+            <div class="clear"></div>
         </div>
         $:content
     </div>
