@@ -27,7 +27,7 @@ class PostService:
 
         list_post = []
         for post_id in list_ids:
-            dic_post = self.db_util.get_hash_obj_by_id('post', post_id)
+            dic_post = self.db_util.get_hash_obj('post:' + post_id)
             dic_post['id'] = post_id
             list_post.append(dic_post)
 
@@ -37,7 +37,7 @@ class PostService:
         """
         根据ID获取post
         """
-        dic_post = self.db_util.get_hash_obj_by_id('post', post_id)
+        dic_post = self.db_util.get_hash_obj('post:' + post_id)
         dic_post['id'] = post_id
 
         return dic_post

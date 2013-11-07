@@ -25,7 +25,7 @@ class BlogService:
         """
         获取博客名和副标题
         """
-        obj = self.db_util.get_blog_name_and_sub_title()
-        blog = Blog(obj[0], obj[1])
+        obj = self.db_util.get_hash_obj('blog')
+        blog = Blog(name=obj['name'], sub_title=obj['sub_title'], username=obj['username'], password=obj['password'])
 
         return blog

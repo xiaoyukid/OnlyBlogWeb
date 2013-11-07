@@ -22,19 +22,11 @@ class DBUtil:
         list_ids = self.r.lrange(obj_name, start, end)
         return list_ids
 
-    def get_hash_obj_by_id(self, obj_name, id):
+    def get_hash_obj(self, name):
         """
-        根据ID获取散列对象
+        获取散列对象
         """
-        obj = self.r.hgetall(obj_name + ":" + id)
-
-        return obj
-
-    def get_str_obj_by_id(self, obj_name, id):
-        """
-        根据ID获取字符串对象
-        """
-        obj = self.r.get(obj_name + ":" + id)
+        obj = self.r.hgetall(name)
 
         return obj
 
@@ -46,10 +38,13 @@ class DBUtil:
 
         return obj
 
-    def get_blog_name_and_sub_title(self):
+    def get_str_obj(self, obj_name):
         """
-        获取博客名和副标题
+        获取字符串对象
         """
-        obj = self.r.hmget('blog', 'name', 'sub_title')
+        obj = self.r.get(obj_name)
 
         return obj
+
+
+

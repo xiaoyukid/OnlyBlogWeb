@@ -12,7 +12,9 @@ __author__ = 'tonghs'
 视图
 '''
 
-render = web.template.render('templates/', base='base')
+base_render = web.template.render('templates/', base='base')
+render = web.template.render('templates/')
+admin_base_render = web.template.render('templates/', base='admin_base')
 
 
 class index:
@@ -22,7 +24,7 @@ class index:
         if ret_type:
             return json.dumps(post_list)
         else:
-            return render.index(params)
+            return base_render.index(params)
 
 
 class faviconICO(object):
@@ -30,12 +32,35 @@ class faviconICO(object):
        return web.seeother('/static/images/favicon.ico')
 
 
+class admin:
+    def GET(self):
+        params = Param(title='登录')
+
+        return render.login(params)
+
+    def POST(self):
+        params = Param()
+        data = web.input()
+        username = data.username
+        password = data.password
+
+        if username == params.blog.username and password == params.blog.password:
+            ret = admin_base_render.admin(params)
+        else:
+            params.message = '登录错误'
+            params.other = {'username': username, 'password': password}
+            params.title = '登录'
+            ret = render.login(params)
+
+        return ret
+
+
 class post:
     def GET(self, post_id):
         post = PostService().get_post(post_id)
         params = Param(post=post, title=post['title'])
 
-        return render.post(params)
+        return base_render.post(params)
 
 
 class category:
@@ -45,7 +70,7 @@ class category:
         if ret_type:
             return json.dumps(post_list)
         else:
-            return render.category(params)
+            return base_render.category(params)
 
 
 class tag:
@@ -55,4 +80,4 @@ class tag:
         if ret_type:
             return json.dumps(post_list)
         else:
-            return render.tag(params)
+            return base_render.tag(params)

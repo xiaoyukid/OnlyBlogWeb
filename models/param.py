@@ -17,15 +17,19 @@ class Param:
     special = None
     post_list = None
     menu_list = None
+    message = None
+    other = None
 
-    def __init__(self, special='',current_page=1, post=None, post_list=None, title=None):
+    def __init__(self, special='',current_page=1, message='', other=None, post=None, post_list=None, title=None):
         #博客相关信息
         self.blog = BlogService().get_blog()
         self.special = special
         #当前页
         self.current_page = current_page
+        self.message = message
         #菜单列表
         self.menu_list = CategoryService().get_menus()
+        self.other = other
         self.post = post
         self.post_list = post_list
         #页面标题
