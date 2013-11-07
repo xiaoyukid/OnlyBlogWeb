@@ -3,6 +3,7 @@
  */
 $(document).ready(function(){
     $('#more').click(showOrHide);
+    $('#allowtab').allowtab();
 });
 
 function showOrHide(){

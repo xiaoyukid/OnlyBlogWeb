@@ -1,6 +1,7 @@
 $(document).ready(function(){
     resize();
     $(window).resize(resize);
+    $('#txt_title').focus();
 });
 
 function showLoad(tipInfo) {
@@ -33,7 +34,7 @@ function closeLoad() {
 
 
 function resize(){
-    var bottom = $(".footer").height() + 16;
+    var bottom = 65;
     if ($(window).height() > $('html').height()){
         bottom += $(window).height() - $('html').height();
     }

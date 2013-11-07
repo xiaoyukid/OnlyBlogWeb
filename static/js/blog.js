@@ -1,9 +1,6 @@
 /**
  * Created by tonghs on 13-11-2.
  */
-$(document).ready(function(){
-
-});
 
 function getNext(page, url){
     var next = page + 1;
