@@ -25,6 +25,11 @@ a:hover{
     clear: both;
 }
 
+.hr{
+    border-bottom: 1px solid #dddddd;
+    margin-bottom: 15px;
+}
+
 .wrapper{
     width: 940px;
     margin: auto;
@@ -73,7 +78,7 @@ a:hover{
     padding: 10px 15px 0 15px;
 }
 
-.menu #more{
+.menu #other_more{
     background-color: #d84c31;
     border: 1px solid #d14836;
     border-left: 0;
@@ -86,33 +91,23 @@ a:hover{
     width: 18px;
 }
 
-.menu #more:hover{
-    background-color: #ab3720;
+.menu #other_more:hover{
+    background-color: #ab3720 !important;
 }
 
 
-#new{
-    background-color: #ab3720;
-    border: 1px solid #d14836;
+#other_new{
+    background-color: #dddddd;
+    border: 1px solid #dddddd;
     border-top: 0;
-    color: #ffffff;
     display: none;
     margin-left: 29px;
-    margin-top: 39px;
+    margin-top: 40px;
     position: absolute;
     text-align: center;
     width: 80px;
 }
 
-
-#new .sub_menu{
-    background-color: #ab3720;
-    color: #ffffff;
-    font-size: 13px;
-}
-#new .sub_menu:hover{
-    background-color: #d84c31;
-}
 
 .menu_more:hover ul li{
     border-bottom: 1px solid #dddddd;
@@ -199,7 +194,7 @@ a:hover{
     width: 600px;
 }
 
-#allowtab{
+#txt_content{
     border:0;
     height: 500px;
     margin: 0;
@@ -211,7 +206,7 @@ a:hover{
 
 .txt_container{
     border: 1px solid #dddddd;
-    padding: 5px;
+    padding: 15px;
 }
 
 .txt_header{
