@@ -28,6 +28,16 @@ $(document).ready(function(){
         data: ["+1", "-1", "smile"]
     });
 
+    //保存按钮
+    $('#btn_save').click(save);
+
+    //保存快捷键 ctrl + enter
+    $('#txt_content').keyup(function(e){
+        if (e.ctrlKey && e.which == 13){
+            save();
+        }
+    });
+
 });
 
 function showOrHide(){
@@ -46,4 +56,80 @@ function showOtherMore(){
 function hideOtherMore(){
     $('#other_new').css('display', 'none');
     $('#other_more').css('background-color', '#d84c31');
+}
+
+function save(){
+    $('#btn_save').attr('disabled', true);
+    $('#btn_save').attr('value', '保存中...');
+
+    //获取标题和分类
+    var titleAndCate = getTitleAndCat($('#txt_title').val());
+    var title = titleAndCate.title;
+    var cate = titleAndCate.cate;
+    //获取内容和标签
+    var contentAndTag = getContentAndTag($('#txt_content').val());
+    var content = contentAndTag.content;
+    var tag = contentAndTag.tag;
+
+    $.ajax({
+        url: '/add_post',
+        data: {
+            title: title,
+            content: content,
+            category: cate,
+            tag: tag
+        },
+        success:function(data){
+            $('#btn_save').attr('disabled', false);
+            $('#btn_save').attr('value', '保存');
+
+            if (data != ''){
+                $('#post_id').val(data);
+            }
+        },
+        error: showErr
+    });
+
+}
+
+function getTitleAndCat(title){
+    var cate = '未分类';
+    var titleAndCate = {
+        title: '',
+        cat: ''
+    };
+    var arrStr = title.split('@cat:');
+    if (arrStr.length > 0){
+
+        titleAndCate.title = arrStr[0];
+
+        if (arrStr.length < 2 || arrStr[1] == ''){
+            titleAndCate.cate = cate;
+        } else {
+            titleAndCate.cate = arrStr[1].trim();
+        }
+    }
+
+
+    return titleAndCate;
+}
+
+function getContentAndTag(content){
+    var contentAndTag = {
+        content: '',
+        tag: ''
+    };
+    var arrStr = content.split('@tag:');
+    if (arrStr.length > 0){
+
+        contentAndTag.content = arrStr[0];
+
+        if (arrStr.length < 2){
+            contentAndTag.tag = '';
+        } else {
+            contentAndTag.tag = arrStr[1].trim();
+        }
+    }
+
+    return contentAndTag
 }

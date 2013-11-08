@@ -81,3 +81,17 @@ class tag:
             return json.dumps(post_list)
         else:
             return base_render.tag(params)
+
+
+class add_post:
+    def GET(self):
+        data = web.input()
+        title = data.title
+        content = data.content
+        category = data.category
+        tag = data.tag
+
+        post = {'title': title, 'content': content, 'category': category, 'tag': tag}
+        id = PostService().add_post(post)
+
+        return id;

@@ -41,5 +41,8 @@ urls = (
     '/tag/(.*)/page/(\d+)/', tag,
     '/tag/(.*)/page/(\d+)', tag,
     '/tag/(.*)/', tag,
-    '/tag/(.*)', tag
+    '/tag/(.*)', tag,
+
+    '/add_post', add_post,
+    '/add_post/', add_post
 )

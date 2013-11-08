@@ -41,3 +41,20 @@ class PostService:
         dic_post['id'] = post_id
 
         return dic_post
+
+    def add_post(self, post):
+        """
+        添加文章
+        """
+        #获取ID
+        id = str(self.db_util.get_incr_count('post:count'))
+        #增加文章
+        self.db_util.add_hash_obj('post:' + id, post)
+        #文章ID列表
+        self.db_util.add_to_list_obj('post:ids', id)
+        #文章tag列表修改
+
+        #文章分类列表修改
+
+
+        return id

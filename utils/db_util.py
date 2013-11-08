@@ -46,5 +46,11 @@ class DBUtil:
 
         return obj
 
+    def get_incr_count(self, name):
+        return self.r.incr(name)
 
+    def add_hash_obj(self, name, obj):
+        self.r.hmset(name, obj)
 
+    def add_to_list_obj(self, name, value):
+        self.r.lpush(name, value)

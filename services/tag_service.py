@@ -43,3 +43,6 @@ class TagService:
             list_post.append(post)
 
         return list_post
+
+    def add_to_tag(self, name, value):
+        pass

@@ -213,3 +213,17 @@ a:hover{
     height: 25px;
     background-color: #dddddd;
 }
+
+.btn{
+    background-color: #d84c31;
+    border: 1px solid #d14836;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 14px;
+    height: 38px;
+    text-align: center;
+    width: 90px;
+}
+.btn:hover{
+    background-color: #ab3720;
+}
