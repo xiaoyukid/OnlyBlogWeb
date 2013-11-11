@@ -1,24 +1,10 @@
-#!/usr/bin/env python
 #coding=utf-8
-__author__ = 'tonghs'
-'''
-配置文件
-项目相关配置文件
-'''
 
-
-from views.index import *
-
-PAGE_SIZE = 10
-HOST = 'localhost'
-PORT = 6379
-DB = 0
+from controllers.index import *
+__author__ = 'Administrator'
 
 urls = (
     '/favicon.ico', faviconICO,
-
-    '/admin', admin,
-    '/admin/', admin,
 
     '/', index,
     '/page/(\d+)/(\d+)/', index,
@@ -48,4 +34,14 @@ urls = (
 
     '/update_post', update_post,
     '/update_post/', update_post,
+
+
+    '/admin', admin,
+    '/admin/', admin,
+
+    '/login', login,
+    '/login/', login,
+
+    '/logout', logout,
+    '/logout/', logout,
 )

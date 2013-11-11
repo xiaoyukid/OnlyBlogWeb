@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 #coding=utf-8
+from configs import settings
 
 from utils.db_util import DBUtil
-import configs
 
 __author__ = 'tonghs'
 '''
@@ -23,8 +23,8 @@ class PostService:
         """
         获取所有文章
         """
-        start = (int(page) - 1) * int(configs.PAGE_SIZE)
-        end = int(page) * int(configs.PAGE_SIZE) - 1
+        start = (int(page) - 1) * int(settings.PAGE_SIZE)
+        end = int(page) * int(settings.PAGE_SIZE) - 1
 
         list_ids = self.db_util.r.lrange('post:ids', start, end)
 

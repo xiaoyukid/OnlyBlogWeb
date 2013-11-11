@@ -199,6 +199,7 @@ a:hover{
     height: 500px;
     margin: 0;
     outline: none;
+    overflow-y: auto;
     padding: 0;
     resize: none;
     width: 100%;

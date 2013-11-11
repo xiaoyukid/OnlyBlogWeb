@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 #coding=utf-8
-import configs
+from configs import settings
 from services.post_service import PostService
 from utils.db_util import DBUtil
 
@@ -47,8 +47,8 @@ class CategoryService:
         """
         获取分类下所有文章
         """
-        start = (int(page) - 1) * int(configs.PAGE_SIZE)
-        end = int(page) * int(configs.PAGE_SIZE) - 1
+        start = (int(page) - 1) * int(settings.PAGE_SIZE)
+        end = int(page) * int(settings.PAGE_SIZE) - 1
 
         list_post_ids = self.db_util.r.lrange('category:' + name, start, end)
 

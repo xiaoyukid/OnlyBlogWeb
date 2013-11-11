@@ -2,6 +2,7 @@
 #coding=utf-8
 import web
 import json
+from controllers.base import Base
 from models.param import Param
 from services.category_service import CategoryService
 from services.post_service import PostService
@@ -31,8 +32,7 @@ class faviconICO(object):
    def GET(self):
        return web.seeother('/static/images/favicon.ico')
 
-
-class admin:
+class login:
     def GET(self):
         params = Param(title='登录')
 
@@ -45,7 +45,8 @@ class admin:
         password = data.password
 
         if username == params.blog.username and password == params.blog.password:
-            ret = admin_base_render.admin(params)
+            web.ctx.session.username = username
+            ret = web.seeother('/admin')
         else:
             params.message = '登录错误'
             params.other = {'username': username, 'password': password}
@@ -53,6 +54,20 @@ class admin:
             ret = render.login(params)
 
         return ret
+
+class logout:
+    def GET(self):
+        web.ctx.session.username = ''
+        params = Param(title='登录')
+
+        return render.login(params)
+
+
+class admin(Base):
+    def GET(self):
+        params = Param()
+
+        return admin_base_render.admin(params)
 
 
 class post:
