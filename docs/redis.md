@@ -13,7 +13,7 @@
  * 如：category:linux 1
 
 * 分类列表：
- * 列表：categorys 分类名
+ * 有序集合：categorys 分数是文章数
  * 如：categorys linux
  * ps：菜单列表取分类的前五个，根据可根据文章数目作为权重排列
 
@@ -22,6 +22,6 @@
  * 如：tag:test 1
 
 * 标签列表：
- * 列表：tag 标签名
+ * 有序集合：tag 标签名
  * 如：tags test
 

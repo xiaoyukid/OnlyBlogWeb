@@ -19,13 +19,13 @@ class BlogService:
         """
         获取博客配置
         """
-        return self.db_util.get_hash_attr('blog:ids', config_name)
+        return self.db_util.r.hget('blog:ids', config_name)
 
     def get_blog(self):
         """
         获取博客名和副标题
         """
-        obj = self.db_util.get_hash_obj('blog')
+        obj = self.db_util.r.hgetall('blog')
         blog = Blog(name=obj['name'], sub_title=obj['sub_title'], username=obj['username'], password=obj['password'])
 
         return blog

@@ -16,11 +16,20 @@ class TagService:
     def __init__(self):
         self.db_util = DBUtil()
 
+    def add_tag(self, name):
+        """
+        添加/更新tag
+        """
+        score = self.db_util.r.zincrby('tags', name)
+        self.db_util.r.zadd('tags', name, score)
+
+        return score
+
     def get_tags(self):
         """
         获取所有标签
         """
-        dic_menus = self.db_util.get_list_objects('tags', 0, 5)
+        dic_menus = self.db_util.r.zrange('tags', 0, 5)
 
         list_menu = []
         for menu in dic_menus:
@@ -35,7 +44,7 @@ class TagService:
         start = (int(page) - 1) * int(configs.PAGE_SIZE)
         end = int(page) * int(configs.PAGE_SIZE) - 1
 
-        list_post_ids = self.db_util.get_list_objects('tag:' + name, start, end)
+        list_post_ids = self.db_util.r.lrange('tag:' + name, start, end)
 
         list_post = []
         for id in list_post_ids:
@@ -45,4 +54,4 @@ class TagService:
         return list_post
 
     def add_to_tag(self, name, value):
-        pass
+        self.db_util.r.lpush(name, value)

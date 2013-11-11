@@ -11,7 +11,6 @@ $(document).ready(function(){
         } else {
             showOrHide();
         }
-
     });
 
     //文章内容textarea允许tab键
@@ -70,10 +69,16 @@ function save(){
     var contentAndTag = getContentAndTag($('#txt_content').val());
     var content = contentAndTag.content;
     var tag = contentAndTag.tag;
+    var url = '/add_post';
+    var id = $('#post_id').val();
+    if (id != ""){
+        url = '/update_post'
+    }
 
     $.ajax({
-        url: '/add_post',
+        url: url,
         data: {
+            id : id,
             title: title,
             content: content,
             category: cate,
@@ -85,6 +90,7 @@ function save(){
 
             if (data != ''){
                 $('#post_id').val(data);
+                showMsg('保存成功！');
             }
         },
         error: showErr

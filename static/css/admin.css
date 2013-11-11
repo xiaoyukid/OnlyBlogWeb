@@ -227,3 +227,7 @@ a:hover{
 .btn:hover{
     background-color: #ab3720;
 }
+
+.loading{
+    color: #ffffff;
+}

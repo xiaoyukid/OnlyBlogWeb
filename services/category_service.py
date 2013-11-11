@@ -16,11 +16,26 @@ class CategoryService:
     def __init__(self):
         self.db_util = DBUtil()
 
+    def add_category(self, name):
+        """
+        增加/更新分类
+        """
+        score = self.db_util.r.zincrby('categories', name)
+        self.db_util.r.zadd('categories', name, score)
+
+        return score
+
+    def add_to_category(self, name, value):
+        """
+        向分类列表添加文章
+        """
+        self.db_util.r.lpush(name, value)
+
     def get_menus(self):
         """
         获取所有菜单
         """
-        dic_menus = self.db_util.get_list_objects('categorys', 0, 5)
+        dic_menus = self.db_util.r.zrange('categories', 0, 5)
 
         list_menu = []
         for menu in dic_menus:
@@ -35,7 +50,7 @@ class CategoryService:
         start = (int(page) - 1) * int(configs.PAGE_SIZE)
         end = int(page) * int(configs.PAGE_SIZE) - 1
 
-        list_post_ids = self.db_util.get_list_objects('category:' + name, start, end)
+        list_post_ids = self.db_util.r.lrange('category:' + name, start, end)
 
         list_post = []
         for id in list_post_ids:

@@ -95,3 +95,18 @@ class add_post:
         id = PostService().add_post(post)
 
         return id;
+
+
+class update_post:
+    def GET(self):
+        data = web.input()
+        title = data.title
+        content = data.content
+        category = data.category
+        tag = data.tag
+        id = data.id
+
+        post = {'id': id, 'title': title, 'content': content, 'category': category, 'tag': tag}
+        id = PostService().update_post(post)
+
+        return id;
