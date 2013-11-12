@@ -1,0 +1,9 @@
+<uwsgi>
+	<socket>:8001</socket>
+	<master>true</master>
+	<chdir>./</chdir>
+	<module>blog</module>
+	<processes>2</processes>
+	<daemonize>./uwsgi.log</daemonize>
+	<plugins>python</plugins>
+</uwsgi>
