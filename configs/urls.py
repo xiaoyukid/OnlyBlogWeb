@@ -44,4 +44,7 @@ urls = (
 
     '/logout', logout,
     '/logout/', logout,
+
+    '/install', install,
+    '/install/', install,
 )

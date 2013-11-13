@@ -4,6 +4,7 @@ import web
 import json
 from controllers.base import Base
 from models.param import Param
+from services.blog_service import BlogService
 from services.category_service import CategoryService
 from services.post_service import PostService
 from services.tag_service import TagService
@@ -26,6 +27,20 @@ class index:
             return json.dumps(post_list)
         else:
             return base_render.index(params)
+
+
+class install:
+    def GET(self):
+        return render.install()
+
+    def POST(self):
+        data = web.input()
+        name = data.name
+        sub_title = data.sub_title
+        blog = {'name': name, 'sub_title': sub_title}
+        BlogService().set_blog(blog)
+
+        return web.seeother('/')
 
 
 class faviconICO(object):

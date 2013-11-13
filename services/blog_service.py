@@ -29,3 +29,6 @@ class BlogService:
         blog = Blog(name=obj['name'], sub_title=obj['sub_title'], username=obj['username'], password=obj['password'])
 
         return blog
+
+    def set_blog(self, blog):
+        self.db_util.r.hmset('blog', blog)
