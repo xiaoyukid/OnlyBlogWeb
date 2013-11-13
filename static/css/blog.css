@@ -50,7 +50,7 @@ div{
 }
 
 .post_title{
-    font-size: 20px;
+    font-size: 22px;
 
 }
 
@@ -104,6 +104,7 @@ div{
 
 .header .left_header{
     float: left;
+    font-size: 13px;
 }
 
 .header .right_header{
