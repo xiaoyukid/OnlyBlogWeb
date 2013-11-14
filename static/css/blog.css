@@ -6,6 +6,19 @@ html body{
     padding: 0;
 }
 
+code{
+    background-color: #fee9cc;
+}
+
+pre{
+    background-color: #dddddd;
+    padding: 5px 10px;
+}
+
+pre code{
+    background-color: #dddddd;
+}
+
 a{
     color: #21759b;
     text-decoration: none;
