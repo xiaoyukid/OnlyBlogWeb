@@ -47,4 +47,10 @@ urls = (
 
     '/install', install,
     '/install/', install,
+
+    '/get_category', get_category,
+    '/get_category/', get_category,
+
+    '/get_tag', get_tag,
+    '/get_tag/', get_tag,
 )

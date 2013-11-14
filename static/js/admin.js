@@ -16,16 +16,31 @@ $(document).ready(function(){
     //文章内容textarea允许tab键
     $('#txt_content').allowtab();
 
-    //标题和内容召唤模式，使用@召唤分类和标签
-    $('#txt_title').atwho({
-        at: "@cat:",
-        data: ["+1", "-1", "s"]
+    //获取分类
+    $.get('/get_category', function(data){
+        if (data != null){
+             //标题召唤模式，使用@cat:召唤分类
+            $('#txt_title').atwho({
+                at: '@cat:',
+                data: eval('(' + data + ')')
+            });
+
+        }
     });
 
-    $('#txt_content').atwho({
-        at: "@tag:",
-        data: ["+1", "-1", "smile"]
-    });
+    //获取标签
+    $.get('/get_tag', function(data){
+        if (data != null){
+            //内容召唤模式，使用@tag:召唤标签
+            $('#txt_content').atwho({
+                at: "@tag:",
+                data: eval('(' + data + ')')
+            });
+        }
+    })
+
+
+
 
     //保存按钮
     $('#btn_save').click(save);
@@ -75,16 +90,13 @@ function save(){
         url = '/update_post'
     }
 
-    $.ajax({
-        url: url,
-        data: {
+    $.post(url,  {
             id : id,
             title: title,
             content: content,
             category: cate,
             tag: tag
-        },
-        success:function(data){
+        }, function(data){
             $('#btn_save').attr('disabled', false);
             $('#btn_save').attr('value', '保存');
 
@@ -92,9 +104,7 @@ function save(){
                 $('#post_id').val(data);
                 showMsg('保存成功！');
             }
-        },
-        error: showErr
-    });
+        }).error(showErr);
 
 }
 

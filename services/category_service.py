@@ -31,17 +31,21 @@ class CategoryService:
         """
         self.db_util.r.lpush(name, value)
 
+    def get_category(self, start=0, end=-1):
+        """
+        获取分类列表
+        @param start:
+        @param end:
+        """
+        return self.db_util.r.zrange('categories', start, end)
+
     def get_menus(self):
         """
         获取所有菜单
         """
-        dic_menus = self.db_util.r.zrange('categories', 0, 5)
+        menus = self.get_category(0, 5)
 
-        list_menu = []
-        for menu in dic_menus:
-            list_menu.append(menu)
-
-        return list_menu
+        return menus
 
     def get_post_by_category(self, name, page):
         """

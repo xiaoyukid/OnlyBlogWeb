@@ -25,17 +25,13 @@ class TagService:
 
         return score
 
-    def get_tags(self):
+    def get_tag(self, start=0, end=-1):
         """
         获取所有标签
         """
-        dic_menus = self.db_util.r.zrange('tags', 0, 5)
+        tags = self.db_util.r.zrange('tags', start, end)
 
-        list_menu = []
-        for menu in dic_menus:
-            list_menu.append(menu)
-
-        return list_menu
+        return tags
 
     def get_post_by_tag(self, name, page):
         """
