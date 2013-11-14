@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 #coding=utf-8
+from markdown import markdown
 import web
 import json
 from controllers.base import Base
@@ -118,6 +119,7 @@ class add_post:
         data = web.input()
         title = data.title
         content = data.content
+        content = markdown(content)
         category = data.category
         tag = data.tag
 
