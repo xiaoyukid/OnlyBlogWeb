@@ -34,8 +34,6 @@ class Param:
         self.post_list = post_list
         #页面标题
         if title is None:
-            self.title = self.blog.name + " | " + self.blog.sub_title
+            self.title = "%s | %s" % (self.blog.name, self.blog.sub_title)
         else:
-            if type(title) != str:
-                title = title.encode("utf-8")
-            self.title = title + " | " + self.blog.name
+            self.title = "%s | %s" % (title, self.blog.name)
