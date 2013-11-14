@@ -125,7 +125,7 @@ function search(){
     if (event.keyCode == 13){
         var keyword = $('#txtKeyword').val();
         var localUrl = window.location.href;
-        var site = localUrl.substr(0, localUrl.indexOf('/', 8));
+        var site = localUrl.substr(localUrl.indexOf('//') + 2, localUrl.indexOf('/', 8) - localUrl.indexOf('//') - 2);
         var q = 'site:' + site + ' ' + keyword;
         var url = 'http://www.google.com.hk/search?q=' + q;
         window.open(url);
