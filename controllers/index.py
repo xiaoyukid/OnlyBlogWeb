@@ -146,11 +146,11 @@ class get_category:
     def GET(self):
         categories = CategoryService().get_category()
 
-        return categories
+        return json.dumps(categories)
 
 
 class get_tag:
     def GET(self):
         tags = TagService().get_tag()
 
-        return tags
+        return json.dumps(tags)
