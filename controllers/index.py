@@ -26,7 +26,7 @@ class index:
         if ret_type:
             return json.dumps(post_list)
         else:
-            return base_render.index(params)
+            return render.index(params)
 
 
 class install:
