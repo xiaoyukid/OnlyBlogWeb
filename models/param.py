@@ -37,7 +37,7 @@ class Param:
             title_tmp = (self.blog.name, self.blog.sub_title)
         else:
             if type(title) != str:
-                title.encode("utf-8")
+                title = title.encode("utf-8")
             title_tmp = (title, self.blog.name)
 
         self.title = "%s | %s" % title_tmp
