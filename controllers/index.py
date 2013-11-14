@@ -22,7 +22,7 @@ admin_base_render = web.template.render('templates/', base='admin_base')
 class index:
     def GET(self, page=1, ret_type=0):
         post_list = PostService().get_posts(page)
-        params = Param(current_page=int(page), post_list=post_list, title='test')
+        params = Param(current_page=int(page), post_list=post_list)
         if ret_type:
             return json.dumps(post_list)
         else:
