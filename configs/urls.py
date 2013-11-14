@@ -6,7 +6,7 @@ __author__ = 'Administrator'
 urls = (
     '/favicon.ico', faviconICO,
 
-    '/', index,
+    '/', install,
     '/page/(\d+)/(\d+)/', index,
     '/page/(\d+)/(\d+)', index,
     '/page/(\d+)/', index,
