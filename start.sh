@@ -1,4 +1,3 @@
-killall -9 'uwsgi -x blog.xml'
 find . -name "*.pyc" | xargs rm -rf
-uwsgi -x blog.xml
+uwsgi --reload ./uwsgi.pid
 nginx -s reload
