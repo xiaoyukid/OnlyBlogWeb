@@ -36,4 +36,6 @@ class Param:
         if title is None:
             self.title = self.blog.name + " | " + self.blog.sub_title
         else:
-            self.title = title.encode("utf-8") + " | " + self.blog.name
+            if type(title) != str:
+                title = title.encode("utf-8")
+            self.title = title + " | " + self.blog.name
