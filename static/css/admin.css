@@ -1,16 +1,9 @@
-body, ul{
+html body{
     border: 0;
-    font-size: 13px;
+    font-size: 14px;
     margin: 0;
     padding: 0;
 }
-
-li{
-    border: 0;
-    cursor: pointer;
-    list-style: none;
-}
-
 
 a{
     color: #21759b;
@@ -33,6 +26,13 @@ a:hover{
 .wrapper{
     width: 940px;
     margin: auto;
+}
+
+
+.wrapper ul{
+    border: 0;
+    margin: 0;
+    padding: 0;
 }
 
 .header{
@@ -72,8 +72,9 @@ a:hover{
 .menu{
     color: black;
     height: 45px;
-    line-height: 55px;
     float: right;
+    line-height: 55px;
+    list-style: none;
     text-decoration: none;
     padding: 10px 15px 0 15px;
 }
@@ -111,6 +112,8 @@ a:hover{
 
 .menu_more:hover ul li{
     border-bottom: 1px solid #dddddd;
+    cursor: pointer;
+    list-style: none;
 }
 
 
@@ -133,12 +136,17 @@ a:hover{
     color: black;
     display: none;
     font-size: 35px;
+    margin: 0;
+    padding: 0;
     width: 80px;
 }
 
 .menu_more:hover ul{
+    border: 0;
     display: block;
     margin-left: -30px;
+    font-size: 13px;
+    padding: 0;
     position: absolute;
     text-align: center;
 }
@@ -158,6 +166,8 @@ a:hover{
 
 .menu_more:hover ul li{
     border-bottom: 1px solid #dddddd;
+    cursor: pointer;
+    list-style: none;
 }
 
 .detail{
@@ -188,7 +198,11 @@ a:hover{
     height: 25px;
     font-size: 16px;
     font-weight: bold;
-    margin: 0;
+}
+
+.txt{
+
+    margin-bottom: 5px;
     outline: none;
     padding: 0;
     width: 600px;

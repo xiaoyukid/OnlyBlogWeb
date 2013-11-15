@@ -1,7 +1,7 @@
 $(document).ready(function(){
     resize();
     $(window).resize(resize);
-    $('#txt_title').focus();
+
 });
 
 function showLoad(tipInfo) {

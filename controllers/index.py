@@ -119,7 +119,7 @@ class add_post:
         data = web.input()
         title = data.title
         content = data.content
-        content = markdown(content)
+        content = content
         category = data.category
         tag = data.tag
 

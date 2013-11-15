@@ -1,7 +1,13 @@
 /**
  * Created by Administrator on 13-11-7.
  */
+var editor;
 $(document).ready(function(){
+    $('#txt_title').focus();
+
+    editor = new Editor();
+    editor.render();
+
     //单击其他地方隐藏菜单
     $(document).click(function(e){
         if (e.target != null && e.target.id != 'other_more'){
@@ -12,9 +18,6 @@ $(document).ready(function(){
             showOrHide();
         }
     });
-
-    //文章内容textarea允许tab键
-    $('#txt_content').allowtab();
 
     //获取分类
     $.get('/get_category', function(data){
@@ -28,30 +31,19 @@ $(document).ready(function(){
         }
     });
 
-    //获取标签
-    $.get('/get_tag', function(data){
-        if (data != null){
-            //内容召唤模式，使用@tag:召唤标签
-            $('#txt_content').atwho({
-                at: "@tag:",
-                data: eval('(' + data + ')')
-            });
-        }
-    })
-
-
-
+//    //获取标签
+//    $.get('/get_tag', function(data){
+//        if (data != null){
+//            //内容召唤模式，使用@tag:召唤标签
+//            $('pre').atwho({
+//                at: "@tag:",
+//                data: eval('(' + data + ')')
+//            });
+//        }
+//    })
 
     //保存按钮
     $('#btn_save').click(save);
-
-    //保存快捷键 ctrl + enter
-    $('#txt_content').keyup(function(e){
-        if (e.ctrlKey && e.which == 13){
-            save();
-        }
-    });
-
 });
 
 function showOrHide(){
@@ -75,15 +67,20 @@ function hideOtherMore(){
 function save(){
     $('#btn_save').attr('disabled', true);
     $('#btn_save').attr('value', '保存中...');
-
+    editor.codemirror.save();
     //获取标题和分类
     var titleAndCate = getTitleAndCat($('#txt_title').val());
     var title = titleAndCate.title;
     var cate = titleAndCate.cate;
     //获取内容和标签
     var contentAndTag = getContentAndTag($('#txt_content').val());
-    var content = contentAndTag.content;
+    var content = editor.constructor.markdown(contentAndTag.content);
     var tag = contentAndTag.tag;
+
+    if (title == ''){
+        return;
+    }
+
     var url = '/add_post';
     var id = $('#post_id').val();
     if (id != ""){

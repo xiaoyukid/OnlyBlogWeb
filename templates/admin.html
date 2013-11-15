@@ -1,14 +1,15 @@
 $def with (params)
 $var title:
     $params.title
-<link href="/static/css/jquery.atwho.css" rel="stylesheet">
-<script type="text/javascript" src="/static/js/jquery.allowtab.js"></script>
+<link rel="stylesheet" href="/static/css/jquery.atwho.css">
+<link rel="stylesheet" href="/static/css//editor.css" />
 <script type="text/javascript" src="/static/js/jquery.caret.js"></script>
 <script type="text/javascript" src="/static/js/jquery.atwho.js"></script>
+<script type="text/javascript" src="/static/js/editor.js"></script>
+<script type="text/javascript" src="/static/js/marked.js"></script>
 <input id="post_id" type="hidden"/>
 <div class="txt_container">
-    <input id="txt_title"/>
-    <div class="hr">&nbsp;</div>
+    <input id="txt_title" class="txt" />
     <textarea id="txt_content"></textarea>
 </div>
 <br>
