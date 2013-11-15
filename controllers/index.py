@@ -130,7 +130,7 @@ class add_post:
 
 
 class update_post:
-    def GET(self):
+    def POST(self):
         data = web.input()
         title = data.title
         content = data.content
@@ -141,7 +141,7 @@ class update_post:
         post = {'id': id, 'title': title, 'content': content, 'category': category, 'tag': tag}
         id = PostService().update_post(post)
 
-        return id;
+        return id
 
 
 class get_category:

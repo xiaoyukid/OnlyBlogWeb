@@ -84,3 +84,5 @@ class PostService:
         #增加文章
         self.db_util.r.hset('post:' + post['id'], 'title', post['title'])
         self.db_util.r.hset('post:' + post['id'], 'content', post['content'])
+
+        return post['id']
