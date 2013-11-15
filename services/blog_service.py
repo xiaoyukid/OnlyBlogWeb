@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #coding=utf-8
+from configs import db
 from models.blog import Blog
-from utils.db_util import DBUtil
 
 __author__ = 'tonghs'
 '''
@@ -10,25 +10,19 @@ __author__ = 'tonghs'
 
 
 class BlogService:
-    db_util = None
+    r = None
 
     def __init__(self):
-        self.db_util = DBUtil()
-
-    def get_config(self, config_name):
-        """
-        获取博客配置
-        """
-        return self.db_util.r.hget('blog:ids', config_name)
+        self.r = db.r
 
     def get_blog(self):
         """
         获取博客名和副标题
         """
-        obj = self.db_util.r.hgetall('blog')
-        blog = Blog(name=obj['name'], sub_title=obj['sub_title'], username=obj['username'], password=obj['password'])
+        obj = self.r.hgetall(db.H_BLOG)
+        blog = Blog(name=obj[db.BLOG_NAME], title=obj[db.BLOG_TITLE], password=obj[db.BLOG_PASSWORD])
 
         return blog
 
     def set_blog(self, blog):
-        self.db_util.r.hmset('blog', blog)
+        self.r.hmset('blog', blog.__dict__)

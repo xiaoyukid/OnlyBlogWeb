@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 #coding=utf-8
+from configs import db
 from configs import settings
-
-from utils.db_util import DBUtil
+from models.post import Post
 
 __author__ = 'tonghs'
 '''
@@ -11,28 +11,28 @@ __author__ = 'tonghs'
 '''
 
 
-
 class PostService:
-    db_util = None
+    r = None
 
     def __init__(self):
-        self.db_util = DBUtil()
-
+        self.r = db.r
 
     def get_posts(self, page):
         """
         获取所有文章
+
+        @param page 当前页
         """
         start = (int(page) - 1) * int(settings.PAGE_SIZE)
         end = int(page) * int(settings.PAGE_SIZE) - 1
 
-        list_ids = self.db_util.r.lrange('post:ids', start, end)
+        list_ids = self.r.lrange(db.L_POST_IDS, start, end)
 
         list_post = []
         for post_id in list_ids:
-            dic_post = self.db_util.r.hgetall('post:' + post_id)
-            dic_post['id'] = post_id
-            list_post.append(dic_post)
+            dic_post = self.r.hgetall(db.H_POST % post_id)
+            post = Post(id=post_id, title=dic_post[db.H_POST_TITLE], content=dic_post[db.H_POST_CONTENT])
+            list_post.append(post)
 
         return list_post
 
@@ -40,37 +40,37 @@ class PostService:
         """
         根据ID获取post
         """
-        dic_post = self.db_util.r.hgetall('post:' + post_id)
-        dic_post['id'] = post_id
+        dic_post = self.r.hgetall(db.H_POST % int(post_id))
+        post = Post(id=post_id, title=dic_post[db.H_POST_TITLE], content=dic_post[db.H_POST_CONTENT])
 
-        return dic_post
+        return post
 
     def add_post(self, post):
         """
         添加文章
         """
-        pipe = self.db_util.r.pipeline()
+        pipe = self.r.pipeline()
 
         #获取ID
-        id = str(self.db_util.r.incr('post:count'))
+        id = str(self.r.incr(db.STR_POST_COUNT))
 
         #添加/更新tag
-        tag_score = pipe.zincrby('tags', post['tag'])
+        tag_score = pipe.zincrby('tags', post.tag)
 
         #tag文章列表修改
-        pipe.lpush('tag:' + post['tag'], id)
+        #pipe.lpush('tag:' + post['tag'], id)
 
         #添加/更新分类
-        cate_score = pipe.zincrby('categories', post['category'])
+        #cate_score = pipe.zincrby('categories', post['category'])
 
         #文章分类列表修改
-        pipe.lpush('category:' + post['category'], id)
+        #pipe.lpush('category:' + post['category'], id)
 
         #文章ID列表
-        pipe.lpush('post:ids', id)
+        pipe.lpush(db.L_POST_IDS, id)
 
         #增加文章
-        pipe.hmset('post:' + id, post)
+        pipe.hmset(db.H_POST % int(id), post.__dict__)
 
         pipe.execute()
 
@@ -82,7 +82,7 @@ class PostService:
         """
 
         #增加文章
-        self.db_util.r.hset('post:' + post['id'], 'title', post['title'])
-        self.db_util.r.hset('post:' + post['id'], 'content', post['content'])
+        self.r.hset(db.H_POST % int(post.id), 'title', post.title)
+        self.r.hset(db.H_POST % int(post.id), 'content', post.content)
 
-        return post['id']
+        return post.id

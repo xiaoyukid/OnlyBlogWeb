@@ -1,6 +1,7 @@
 #coding=utf-8
 
 from controllers.index import *
+from controllers.system import *
 __author__ = 'Administrator'
 
 urls = (

@@ -1,27 +1,33 @@
 * 全局设置：
- * 散列：blog name sub_title
- * 如：blog name Blog sub_title this is a blog
+    * 散列:key: blog field:name title password
+    * name:博客名 title:博客标题 password:管理密码
 
 * 文章：
- * 散列：post:文章id title content category tag
- * 如：post:1 title test content test category linux tag linux
- * 文章数：str：post:counts
- * 文章ID列表：列表：post:ids
+    * 文章对象。散列:key: post:文章id field:title:标题 content:内容 pub_date:发布时间 category:分类ID
+    * 文章标签。集合:key: post:文章ID:tag member:标签ID
+* 文章数/ID：
+    * 字符:key: post:counts value:自增ID数
+    * incr 获取自增ID
+* 文章ID列表：
+    * 列表：key:post:ids
+    * 存放文章id
 
 * 分类
- * 列表：category:分类名 文章id
- * 如：category:linux 1
-
+    * 分类对象。字符:key: category:分类ID value:分类名
+    * 字符:key: category:分类名 value:分类ID
+    * 分类中的文章。集合:key: category:分类ID:posts member:文章ID
+* 分类数/ID
+    * 字符: key:category:count
+    * incr 获取自增 ID
 * 分类列表：
- * 有序集合：categorys 分数是文章数
- * 如：categorys linux
- * ps：菜单列表取分类的前五个，根据可根据文章数目作为权重排列
+    * 有序集合: key:category:ids member:分类ID score:文章数
 
 * 标签
- * 列表：tag:标签名 文章id
- * 如：tag:test 1
-
+    * 标签对象。字符:key: tag:标签ID value:分类名
+    * 字符:key: tag:标签名 value:ID
+    * 该标签对应文章。集合:key: tag:标签ID:posts member:文章ID
+* 标签数/ID
+    * 字符: key:tag:count
+    * incr 获取自增 ID
 * 标签列表：
- * 有序集合：tag 标签名
- * 如：tags test
-
+    * 列表:key: tag:ids value:标签ID

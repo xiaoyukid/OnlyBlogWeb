@@ -7,13 +7,11 @@ __author__ = 'tonghs'
 
 
 class Blog:
-    name = 'My Blog'
-    sub_title = 'this is a blog'
-    username = ''
-    password = ''
+    name = None
+    title = None
+    password = None
 
-    def __init__(self, name, password, sub_title, username):
+    def __init__(self, name='My Blog', title='this is a blog', password='tonghs'):
         self.name = name
+        self.title = title
         self.password = password
-        self.sub_title = sub_title
-        self.username = username
