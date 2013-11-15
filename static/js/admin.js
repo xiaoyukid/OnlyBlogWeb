@@ -101,7 +101,11 @@ function save(){
                 $('#post_id').val(data);
                 showMsg('保存成功！');
             }
-        }).error(showErr);
+        }).error(function(req, msg, errorThrown){
+            showErr(req, msg, errorThrown);
+            $('#btn_save').attr('disabled', false);
+            $('#btn_save').attr('value', '保存');
+        });
 
 }
 

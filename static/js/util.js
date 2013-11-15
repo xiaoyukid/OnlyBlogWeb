@@ -45,10 +45,7 @@ function resize(){
 }
 
 function showErr(req, msg, errorThrown){
-    if (req.status != 404){
-        showMsg("出错了，请重试...");
-    }
-
+    showMsg("出错了，请重试...");
 }
 
 function showMsg(msg) {
