@@ -2,38 +2,25 @@
  * Created by Administrator on 13-11-7.
  */
 $(document).ready(function(){
-    $('#username').focus(function(){
-        focus_handler('username');
-    });
     $('#password').focus(function(){
         focus_handler('password');
     });
 
-    $('#username').keypress(function(){
-        if(event.keyCode == 13){
-            $('#password').focus();
-        }
-
-    });
     $('#password').keypress(function(){
         if(event.keyCode == 13){
             $('#btn').click();
         }
     });
 
-    $('#username').blur(function(){
-        isValid('username');
-    });
-
     $('#password').blur(function(){
         isValid('password');
     });
 
-    if ($.cookie('username') != null){
-        $('#username').val($.cookie('username'));
+    if ($.cookie('password') != null){
+        $('#password').val($.cookie('password'));
     }
 
-    $('#username').focus();
+    $('#password').focus();
 
     $('#btn').click(login);
 });
@@ -56,11 +43,10 @@ function focus_handler(id){
 }
 
 function login(){
-    var username = $('#username').val();
     var password = $('#password').val();
-    if(username != '' && password != ''){
+    if(password != ''){
         $('form').submit();
     } else {
-        $('.msg').html('用户名或密码不可为空！');
+        $('.msg').html('密码不可为空！');
     }
 }

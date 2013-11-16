@@ -6,5 +6,5 @@ __author__ = 'Administrator'
 
 class Base:
     def __init__(self):
-        if web.ctx.session.username == '':
+        if not web.ctx.session.is_login:
             web.seeother('/login')

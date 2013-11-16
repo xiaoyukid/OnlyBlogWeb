@@ -29,38 +29,6 @@ class index:
             return base_render.index(params)
 
 
-
-class login:
-    def GET(self):
-        params = Param(title='登录')
-
-        return render.login(params)
-
-    def POST(self):
-        params = Param()
-        data = web.input()
-        username = data.username
-        password = data.password
-
-        if username == params.blog.username and password == params.blog.password:
-            web.ctx.session.username = username
-            ret = web.seeother('/admin')
-        else:
-            params.message = '登录错误'
-            params.other = {'username': username, 'password': password}
-            params.title = '登录'
-            ret = render.login(params)
-
-        return ret
-
-class logout:
-    def GET(self):
-        web.ctx.session.username = ''
-        params = Param(title='登录')
-
-        return render.login(params)
-
-
 class admin(Base):
     def GET(self):
         params = Param()
@@ -68,12 +36,6 @@ class admin(Base):
         return admin_base_render.admin(params)
 
 
-class post:
-    def GET(self, post_id):
-        post = PostService().get_post(post_id)
-        params = Param(post=post, title=post['title'])
-
-        return base_render.post(params)
 
 
 class category:
@@ -95,35 +57,6 @@ class tag:
         else:
             return base_render.tag(params)
 
-
-class add_post:
-    def POST(self):
-        data = web.input()
-        title = data.title
-        content = data.content
-        content = content
-        category = data.category
-        tag = data.tag
-
-        post = {'title': title, 'content': content, 'category': category, 'tag': tag}
-        id = PostService().add_post(post)
-
-        return id
-
-
-class update_post:
-    def POST(self):
-        data = web.input()
-        title = data.title
-        content = data.content
-        category = data.category
-        tag = data.tag
-        id = data.id
-
-        post = {'id': id, 'title': title, 'content': content, 'category': category, 'tag': tag}
-        id = PostService().update_post(post)
-
-        return id
 
 
 class get_category:

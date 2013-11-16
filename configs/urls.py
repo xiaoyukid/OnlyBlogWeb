@@ -2,6 +2,8 @@
 
 from controllers.index import *
 from controllers.system import *
+from controllers.post import *
+
 __author__ = 'Administrator'
 
 urls = (

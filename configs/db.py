@@ -23,3 +23,29 @@ H_POST_PUB_DATE = 'pub_date'
 STR_POST_COUNT = 'post:count'
 # 文章ID列表
 L_POST_IDS = 'post:ids'
+
+# 文章标签关联
+S_POST_TAGS = 'post:%d:tags'
+
+# 分类对象
+STR_CATEGORY_ID_TO_NAME = 'category_id_to_name:%d'
+STR_CATEGORY_NAME_TO_ID = 'category_name_to_id:%s'
+# 分类列表
+Z_CATEGORY_IDS = 'category:ids'
+# 分类计数
+STR_CATEGORY_COUNT = 'category:count'
+# 该分类文章列表
+L_CATEGORY_POSTS = 'category:%d:posts'
+
+# 标签对象
+STR_TAG_ID_TO_NAME = 'tag_id_to_name:%d'
+STR_TAG_NAME_TO_ID = 'tag_name_to_id:%s'
+# 标题列表
+L_TAG_IDS = 'tag:ids'
+# 标签计数
+STR_TAG_COUNT = 'tag:count'
+# 该标签下的文章列表
+L_TAG_POSTS = 'tag:%d:posts'
+
+
+

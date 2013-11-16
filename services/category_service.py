@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 #coding=utf-8
 from configs import settings
-from services.post_service import PostService
 from utils.db_util import DBUtil
+from configs import db
 
 __author__ = 'tonghs'
 '''
@@ -11,25 +11,30 @@ __author__ = 'tonghs'
 
 
 class CategoryService:
-    db_util = None
+    r = None
 
     def __init__(self):
-        self.db_util = DBUtil()
+        self.r = DBUtil().r
 
     def add_category(self, name):
         """
         增加/更新分类
         """
-        score = self.db_util.r.zincrby('categories', name)
-        self.db_util.r.zadd('categories', name, score)
+        id = self.r.incrby(db.STR_CATEGORY_COUNT)
+        self.r.set(db.STR_CATEGORY_ID_TO_NAME % int(id), name)
+        self.r.set(db.STR_CATEGORY_NAME_TO_ID % name, id)
+        self.r.zadd(db.Z_CATEGORY_IDS, id, 0)
 
-        return score
+        return id
 
-    def add_to_category(self, name, value):
+    def add_to_category(self, id, post_id):
         """
         向分类列表添加文章
         """
-        self.db_util.r.lpush(name, value)
+        self.r.lpush(db.L_CATEGORY_POSTS % int(id), post_id)
+        #增加该分类的文章数
+        self.r.zincrby(db.Z_CATEGORY_IDS, id)
+
 
     def get_category(self, start=0, end=-1):
         """
@@ -37,7 +42,20 @@ class CategoryService:
         @param start:
         @param end:
         """
-        return self.db_util.r.zrange('categories', start, end)
+        return self.r.zrange('categories', start, end)
+
+    def get_category_by_name(self, name):
+        """
+        根据分类名获取ID
+        """
+        id = self.r.get(db.STR_CATEGORY_NAME_TO_ID % name)
+
+        # 分类不存在
+        if not id:
+            id = self.add_category(name)
+
+        return id
+
 
     def get_menus(self):
         """
@@ -54,11 +72,11 @@ class CategoryService:
         start = (int(page) - 1) * int(settings.PAGE_SIZE)
         end = int(page) * int(settings.PAGE_SIZE) - 1
 
-        list_post_ids = self.db_util.r.lrange('category:' + name, start, end)
+        list_post_ids = self.r.lrange('category:' + name, start, end)
 
         list_post = []
-        for id in list_post_ids:
-            post = PostService().get_post(id)
-            list_post.append(post)
+        #for id in list_post_ids:
+        #    post = PostService().get_post(id)
+        #    list_post.append(post)
 
         return list_post

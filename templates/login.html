@@ -21,13 +21,6 @@ $def with (params)
     <div class="login_area">
         <div class="content">
             <form method="post" action="/login">
-                <div class="tip" id='username_tip' title="用户名">U</div>
-                $if params.other and params.other.has_key('username'):
-                    <input type="text" name="username" id="username" value="$params.other['username']" class="txt"/>
-                $else:
-                    <input type="text" name="username"  id="username" class="txt"/>
-                <div class="clear"></div>
-                <p>
                 <div class="tip" id='password_tip' title="密码">P</div>
                 $if params.other and params.other.has_key('username'):
                     <input type="password" name="password" id="password" value="$params.other['password']" class="txt"/>

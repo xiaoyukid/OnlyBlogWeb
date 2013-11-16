@@ -8,7 +8,7 @@ import web
 
 urls = urls.urls
 app = web.application(urls, globals())
-session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'username': ''})
+session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'is_login': ''})
 
 def session_hook():
     web.ctx.session = session

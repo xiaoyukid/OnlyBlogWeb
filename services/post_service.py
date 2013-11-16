@@ -3,6 +3,8 @@
 from configs import db
 from configs import settings
 from models.post import Post
+from services.tag_service import TagService
+from services.category_service import CategoryService
 
 __author__ = 'tonghs'
 '''
@@ -49,32 +51,44 @@ class PostService:
         """
         添加文章
         """
-        pipe = self.r.pipeline()
 
-        #获取ID
-        id = str(self.r.incr(db.STR_POST_COUNT))
+        # 获取ID
+        id = self.r.incr(db.STR_POST_COUNT)
+        post.id = id
 
-        #添加/更新tag
-        tag_score = pipe.zincrby('tags', post.tag)
+        # 设置文章标签
+        self.set_tags(post)
 
-        #tag文章列表修改
-        #pipe.lpush('tag:' + post['tag'], id)
-
-        #添加/更新分类
-        #cate_score = pipe.zincrby('categories', post['category'])
-
-        #文章分类列表修改
-        #pipe.lpush('category:' + post['category'], id)
+        # 设置分类
+        self.set_category(post)
 
         #文章ID列表
-        pipe.lpush(db.L_POST_IDS, id)
+        self.r.lpush(db.L_POST_IDS, id)
 
+        dic_post = post.__dict__
+        del dic_post['tags']
         #增加文章
-        pipe.hmset(db.H_POST % int(id), post.__dict__)
-
-        pipe.execute()
+        self.r.hmset(db.H_POST % int(id), dic_post)
 
         return id
+
+    def set_tags(self, post):
+        # 添加/更新tag
+        tag_ids = []
+        for tag in post.tags:
+            tag_id = TagService().get_tag_by_name(tag)
+            TagService().add_to_tag(tag_id, post.id)
+            tag_ids.append(tag_id)
+
+        self.r.sadd(db.S_POST_TAGS % int(post.id), tag_ids)
+
+
+    def set_category(self, post):
+        # 获取分类ID（当分类不存在时添加）
+        category = CategoryService().get_category_by_name(post.category)
+        post.category = category
+        # 添加文章到分类文章集合
+        CategoryService().add_to_category(category, post.id)
 
     def update_post(self, post):
         """
