@@ -44,6 +44,14 @@ class CategoryService:
         """
         return self.r.zrange('categories', start, end)
 
+    def get_category_by_id(self, id):
+        """
+        根据分类ID获取分类名
+        """
+        name = self.r.get(db.STR_CATEGORY_ID_TO_NAME % int(id))
+
+        return name
+
     def get_category_by_name(self, name):
         """
         根据分类名获取ID

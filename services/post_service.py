@@ -32,8 +32,18 @@ class PostService:
 
         list_post = []
         for post_id in list_ids:
-            dic_post = self.r.hgetall(db.H_POST % post_id)
-            post = Post(id=post_id, title=dic_post[db.H_POST_TITLE], content=dic_post[db.H_POST_CONTENT])
+            dic_post = self.r.hgetall(db.H_POST % int(post_id))
+            # 获取文章分类
+            category = CategoryService().get_category_by_id(dic_post[db.H_POST_CATEGORY])
+            # 获取文章标签
+            tags = []
+            tag_ids = self.get_tags(post_id)
+            for tag_id in tag_ids:
+                tag = TagService().get_tag_by_id(tag_id)
+                tags.append(tag)
+
+            post = Post(id=post_id, title=dic_post[db.H_POST_TITLE], content=dic_post[db.H_POST_CONTENT],
+                        pub_date=dic_post[db.H_POST_PUB_DATE], category=category, tags=tags)
             list_post.append(post)
 
         return list_post
@@ -74,13 +84,10 @@ class PostService:
 
     def set_tags(self, post):
         # 添加/更新tag
-        tag_ids = []
         for tag in post.tags:
             tag_id = TagService().get_tag_by_name(tag)
             TagService().add_to_tag(tag_id, post.id)
-            tag_ids.append(tag_id)
-
-        self.r.sadd(db.S_POST_TAGS % int(post.id), tag_ids)
+            self.r.sadd(db.S_POST_TAGS % int(post.id), tag_id)
 
 
     def set_category(self, post):
@@ -100,3 +107,12 @@ class PostService:
         self.r.hset(db.H_POST % int(post.id), 'content', post.content)
 
         return post.id
+
+    def get_tags(self, id):
+        """
+        根据文章id获取所有标签
+        @param id:
+        @return:
+        """
+        tag_ids = self.r.smembers(db.S_POST_TAGS % int(id))
+        return tag_ids

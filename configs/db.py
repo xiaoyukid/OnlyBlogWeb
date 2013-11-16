@@ -18,6 +18,7 @@ H_POST = 'post:%d'
 H_POST_TITLE = 'title'
 H_POST_CONTENT = 'content'
 H_POST_PUB_DATE = 'pub_date'
+H_POST_CATEGORY = 'category'
 
 # 自增文章ID
 STR_POST_COUNT = 'post:count'

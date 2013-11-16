@@ -33,7 +33,15 @@ class TagService:
         tags = self.r.zrange('tags', start, end)
 
         return tags
-    
+
+    def get_tag_by_id(self, id):
+        """
+        根据ID获取标签
+        """
+        tag = self.r.get(db.STR_TAG_ID_TO_NAME % int(id))
+
+        return tag
+
     def get_tag_by_name(self, name):
         """
         根据tag名获取id
