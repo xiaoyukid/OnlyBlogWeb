@@ -3,6 +3,7 @@
 from configs import settings
 from utils.db_util import DBUtil
 from configs import db
+from models.menu import Menu
 
 __author__ = 'tonghs'
 '''
@@ -42,7 +43,7 @@ class CategoryService:
         @param start:
         @param end:
         """
-        return self.r.zrange('categories', start, end)
+        return self.r.zrange(db.Z_CATEGORY_IDS, start, end)
 
     def get_category_by_id(self, id):
         """
@@ -69,7 +70,11 @@ class CategoryService:
         """
         获取所有菜单
         """
-        menus = self.get_category(0, 5)
+        menu_ids = self.get_category(0, 5)
+        menus = []
+        for menu_id in menu_ids:
+            text = self.get_category_by_id(menu_id)
+            menus.append(Menu(menu_id, text))
 
         return menus
 
