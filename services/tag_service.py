@@ -53,21 +53,16 @@ class TagService:
 
         return id
 
-    def get_post_by_tag(self, name, page):
+    def get_post_ids_by_tag(self, id, page):
         """
         获取该标签下所有文章
         """
         start = (int(page) - 1) * int(settings.PAGE_SIZE)
         end = int(page) * int(settings.PAGE_SIZE) - 1
 
-        list_post_ids = self.r.lrange('tag:' + name, start, end)
+        list_post_ids = self.r.lrange(db.L_TAG_POSTS % int(id), start, end)
 
-        list_post = []
-        #for id in list_post_ids:
-        #    post = PostService().get_post(id)
-        #    list_post.append(post)
-
-        return list_post
+        return list_post_ids
 
     def add_to_tag(self, id, post_id):
         self.r.lpush(db.L_TAG_POSTS % int(id), post_id)

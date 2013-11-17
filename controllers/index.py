@@ -34,23 +34,3 @@ class admin(Base):
         params = Param()
 
         return admin_base_render.admin(params)
-
-
-
-class tag:
-    def GET(self, name, page=1, ret_type=0):
-        post_list = TagService().get_post_by_tag(name, page)
-        params = Param(current_page=int(page), post_list=post_list, title=name, special=name)
-        if ret_type:
-            return json.dumps(post_list)
-        else:
-            return base_render.tag(params)
-
-
-
-
-class get_tag:
-    def GET(self):
-        tags = TagService().get_tag()
-
-        return json.dumps(tags)

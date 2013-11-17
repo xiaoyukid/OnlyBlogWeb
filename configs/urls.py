@@ -4,6 +4,7 @@ from controllers.index import *
 from controllers.system import *
 from controllers.post import *
 from controllers.category import *
+from controllers.tag import *
 
 __author__ = 'Administrator'
 
