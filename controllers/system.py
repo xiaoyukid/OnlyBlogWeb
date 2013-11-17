@@ -1,13 +1,10 @@
 #coding=utf-8
 from models.blog import Blog
 from models.param import Param
+from configs.renders import *
+from services.blog_service import BlogService
 
 __author__ = 'Administrator'
-from services.blog_service import BlogService
-import web
-
-
-render = web.template.render('templates/')
 
 
 class install:

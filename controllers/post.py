@@ -3,15 +3,13 @@
 from services.post_service import PostService
 from models.post import Post
 from models.param import Param
-import web
+from configs.renders import *
+
 
 __author__ = 'tonghs'
 '''
 文章相关
 '''
-
-base_render = web.template.render('templates/', base='base')
-admin_base_render = web.template.render('templates/', base='admin_base')
 
 class post:
     def GET(self, post_id):

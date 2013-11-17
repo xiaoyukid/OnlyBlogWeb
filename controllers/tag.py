@@ -1,20 +1,15 @@
 #!/usr/bin/env python
 #coding=utf-8
-import web
 import json
 from models.param import Param
 from services.post_service import PostService
-
+from configs.renders import *
 from services.tag_service import TagService
 
 __author__ = 'tonghs'
 '''
 视图
 '''
-
-base_render = web.template.render('templates/', base='base')
-render = web.template.render('templates/')
-admin_base_render = web.template.render('templates/', base='admin_base')
 
 
 class tag:

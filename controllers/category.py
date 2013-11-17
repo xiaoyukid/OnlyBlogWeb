@@ -1,20 +1,14 @@
 #!/usr/bin/env python
 #coding=utf-8
 from services.post_service import PostService
-
+import json
+from models.param import Param
+from services.category_service import CategoryService
+from configs.renders import *
 __author__ = 'tonghs'
 '''
 
 '''
-import web
-import json
-from models.param import Param
-from services.category_service import CategoryService
-
-
-base_render = web.template.render('templates/', base='base')
-render = web.template.render('templates/')
-admin_base_render = web.template.render('templates/', base='admin_base')
 
 
 class category:
