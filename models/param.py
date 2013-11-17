@@ -20,7 +20,7 @@ class Param:
     message = None
     other = None
 
-    def __init__(self, special='',current_page=1, message='', other=None, post=None, post_list=None, title=None):
+    def __init__(self, special='', current_page=1, message='', other=None, post=None, post_list=None, title=None):
         #博客相关信息
         self.blog = BlogService().get_blog()
         self.special = special

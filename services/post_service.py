@@ -55,6 +55,31 @@ class PostService:
                     pub_date=dic_post[db.H_POST_PUB_DATE], category=category, tags=tags)
         return post
 
+    def get_posts_by_ids(self, ids, ret_type):
+        """
+        根据ID获取post
+        """
+        post_list = []
+        for id in ids:
+            dic_post = self.r.hgetall(db.H_POST % int(id))
+            # 获取文章分类
+            category = CategoryService().get_category_by_id(dic_post[db.H_POST_CATEGORY])
+            # 获取文章标签
+            tags = []
+            tag_ids = self.get_tags(id)
+            for tag_id in tag_ids:
+                tag = TagService().get_tag_by_id(tag_id)
+                tags.append(tag)
+
+            post = Post(id=id, title=dic_post[db.H_POST_TITLE], content=dic_post[db.H_POST_CONTENT],
+                        pub_date=dic_post[db.H_POST_PUB_DATE], category=category, tags=tags)
+
+            if ret_type:
+                post = post.__dict__
+            post_list.append(post)
+
+        return post_list
+
     def add_post(self, post):
         """
         添加文章

@@ -37,17 +37,6 @@ class admin(Base):
 
 
 
-
-class category:
-    def GET(self, name, page=1, ret_type=0):
-        post_list = CategoryService().get_post_by_category(name, page)
-        params = Param(current_page=int(page), post_list=post_list, title=name, special=name)
-        if ret_type:
-            return json.dumps(post_list)
-        else:
-            return base_render.category(params)
-
-
 class tag:
     def GET(self, name, page=1, ret_type=0):
         post_list = TagService().get_post_by_tag(name, page)
@@ -58,12 +47,6 @@ class tag:
             return base_render.tag(params)
 
 
-
-class get_category:
-    def GET(self):
-        categories = CategoryService().get_category()
-
-        return json.dumps(categories)
 
 
 class get_tag:
