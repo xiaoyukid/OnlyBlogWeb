@@ -2,6 +2,7 @@
 #coding=utf-8
 from services.post_service import PostService
 from models.post import Post
+from models.param import Param
 import web
 
 __author__ = 'tonghs'
@@ -14,8 +15,8 @@ admin_base_render = web.template.render('templates/', base='admin_base')
 
 class post:
     def GET(self, post_id):
-        post = PostService().get_post(post_id)
-        params = Param(post=post, title=post['title'])
+        post = PostService().get_post_by_id(post_id)
+        params = Param(post=post, title=post.title)
 
         return base_render.post(params)
 
