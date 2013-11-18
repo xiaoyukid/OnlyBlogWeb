@@ -3,7 +3,6 @@
 from configs import settings
 from utils.db_util import DBUtil
 from configs import db
-from models.menu import Menu
 
 __author__ = 'tonghs'
 '''
@@ -36,14 +35,19 @@ class CategoryService:
         #增加该分类的文章数
         self.r.zincrby(db.Z_CATEGORY_IDS, id)
 
-
     def get_category(self, start=0, end=-1):
         """
         获取分类列表
         @param start:
         @param end:
         """
-        return self.r.zrange(db.Z_CATEGORY_IDS, start, end)
+        categories = []
+        ids = self.r.zrange(db.Z_CATEGORY_IDS, start, end)
+        for id in ids:
+            category = self.get_category_by_id(id)
+            categories.append(category)
+
+        return categories
 
     def get_category_by_id(self, id):
         """
@@ -70,11 +74,7 @@ class CategoryService:
         """
         获取所有菜单
         """
-        menu_ids = self.get_category(0, 5)
-        menus = []
-        for menu_id in menu_ids:
-            text = self.get_category_by_id(menu_id)
-            menus.append(Menu(menu_id, text))
+        menus = self.get_category(0, 5)
 
         return menus
 
