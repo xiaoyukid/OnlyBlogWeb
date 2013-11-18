@@ -1,6 +1,11 @@
 /**
  * Created by tonghs on 13-11-2.
  */
+$(document).ready(function(){
+   get_menu();
+
+});
+
 
 function getNext(page, url){
     var next = page + 1;
@@ -44,6 +49,38 @@ function getNext(page, url){
                 $('#pager').attr('onclick', 'getNext(' + next + ', "' + url + '")');
             }
 
+        }
+    });
+}
+
+function get_menu(){
+    $.get('/get_category', function(data){
+        if (data != null){
+            var arrObj = JSON.parse(data);
+            var menu = $('#menu');
+            var li_other=$('<li></li>');//创建一个菜单li
+
+            li_other.html('<a href="javascript:void(0);">其他分类</a>');//设置li内容
+            var div = $('<div></div>')
+            div.attr('class', 'sub_menu_container');
+            if (arrObj != null && arrObj.length > 0){
+                for (var i = 0; i < arrObj.length; i++){
+                    if (i < 5){
+                        var li=$('<li></li>');//创建一个菜单li
+                        li.html('<a href="/category/' + arrObj[i] + '">' + arrObj[i] + '</a>');//设置li内容
+                        menu.append(li);
+                    } else {
+                        var a = $('<a>' + arrObj[i] + '</a>')
+                        a.attr('href', '/category/' + arrObj[i]);
+                        div.append(a)
+                    }
+                }
+                if (arrObj.length > 5){
+                    li_other.append(div);
+                    menu.append(li_other);
+                }
+
+            }
         }
     });
 }

@@ -6,26 +6,6 @@ $var blog_name:
 $var blog_title:
     $params.blog.title
 
-<div class="menu">
-    <ul>
-        <li>
-            <a href="/">首页</a>
-        </li>
-        $for menu in params.menu_list:
-            <li>
-                <a href="/category/$menu">$menu</a>
-            </li>
-        <li>
-            <a href="javascript:void(0);">所有分类</a>
-            <div class="sub_menu_container">
-                $for category in params.categories:
-                <a href="/category/$category">$category</a><br>
-            </div>
-
-        </li>
-    </ul>
-    <div class="clear"></div>
-</div>
 <div id="post">
 $for post in params.post_list:
     <div class="post_wrapper">
