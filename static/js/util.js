@@ -1,9 +1,3 @@
-$(document).ready(function(){
-    resize();
-    $(window).resize(resize);
-
-});
-
 function showLoad(tipInfo) {
     if ($("#tipDiv").size() == 0){
         var eTip = document.createElement('div');
@@ -34,14 +28,16 @@ function closeLoad() {
 
 
 function resize(){
-    var bottom = 65;
-    if ($(window).height() > $('html').height()){
-        bottom += $(window).height() - $('html').height();
+    var height = $('.wrapper').height() + 5;
+    if ($(window).height() < height){
+        var bottom = 65;
+        var left = ($('html').width() - 940) / 2 + 940;
+        $('#gotop').css('bottom', bottom);
+        $('#gotop').css('left', left);
+        $('#gotop').css('display', 'block');
+    } else {
+        $('#gotop').css('display', 'none');
     }
-
-    var left = ($('html').width() - 940) / 2 + 940;
-    $('#gotop').css('left', left);
-    $('#gotop').css('bottom', bottom);
 }
 
 function showErr(req, msg, errorThrown){

@@ -2,8 +2,8 @@
  * Created by tonghs on 13-11-2.
  */
 $(document).ready(function(){
-   get_menu();
-
+    get_menu();
+    $(window).resize(resize);
 });
 
 
@@ -82,5 +82,6 @@ function get_menu(){
 
             }
         }
+        resize();
     });
 }
