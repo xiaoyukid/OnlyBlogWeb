@@ -2,6 +2,7 @@
 #coding=utf-8
 from configs import db
 from models.blog import Blog
+from models.exceptions import UnInitException
 
 __author__ = 'tonghs'
 '''
@@ -19,8 +20,11 @@ class BlogService:
         """
         获取博客名和副标题
         """
-        obj = self.r.hgetall(db.H_BLOG)
-        blog = Blog(name=obj[db.BLOG_NAME], title=obj[db.BLOG_TITLE], password=obj[db.BLOG_PASSWORD])
+        try:
+            obj = self.r.hgetall(db.H_BLOG)
+            blog = Blog(name=obj[db.BLOG_NAME], title=obj[db.BLOG_TITLE], password=obj[db.BLOG_PASSWORD])
+        except:
+            raise UnInitException()
 
         return blog
 

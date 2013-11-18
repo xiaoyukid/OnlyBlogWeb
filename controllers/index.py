@@ -2,6 +2,7 @@
 #coding=utf-8
 import json
 from controllers.base import Base
+from models.exceptions import UnInitException
 from models.param import Param
 from configs.renders import *
 from services.post_service import PostService
@@ -14,7 +15,11 @@ __author__ = 'tonghs'
 class index:
     def GET(self, page=1, ret_type=0):
         post_list = PostService().get_posts(page)
-        params = Param(current_page=int(page), post_list=post_list)
+        try:
+            params = Param(current_page=int(page), post_list=post_list)
+        except UnInitException:
+            return web.seeother('/install')
+
         if ret_type:
             return json.dumps(post_list)
         else:
@@ -23,6 +28,10 @@ class index:
 
 class admin(Base):
     def GET(self):
-        params = Param()
+        try:
+            params = Param()
+        except UnInitException:
+            return
+
 
         return admin_base_render.admin(params)

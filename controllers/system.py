@@ -1,5 +1,6 @@
 #coding=utf-8
 from models.blog import Blog
+from models.exceptions import UnInitException
 from models.param import Param
 from configs.renders import *
 from services.blog_service import BlogService
@@ -30,7 +31,11 @@ class faviconICO(object):
 
 class login:
     def GET(self):
-        params = Param(title='登录')
+        try:
+            params = Param(title='登录')
+        except UnInitException:
+            return web.seeother('/install')
+
 
         return render.login(params)
 
