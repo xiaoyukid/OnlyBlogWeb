@@ -16,7 +16,7 @@ class index:
     def GET(self, page=1, ret_type=0):
         post_list = PostService().get_posts(page)
         try:
-            params = Param(current_page=int(page), post_list=post_list)
+            params = Param(title='test', current_page=int(page), post_list=post_list)
         except UnInitException:
             return web.seeother('/install')
 
