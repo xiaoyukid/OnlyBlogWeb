@@ -14,11 +14,13 @@ code{
 
 pre{
     background-color: #dddddd;
+    border: 1px solid #dddddd;
     padding: 5px 10px;
 }
 
 pre code{
     background-color: #dddddd;
+    border: 0;
 }
 
 a{
