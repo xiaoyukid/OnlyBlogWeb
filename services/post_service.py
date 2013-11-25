@@ -112,10 +112,13 @@ class PostService:
             TagService().add_to_tag(tag_id, post.id)
             self.r.sadd(db.S_POST_TAGS % int(post.id), tag_id)
 
-
     def set_category(self, post):
-        # 获取分类ID（当分类不存在时添加）
+        # 获取分类ID
         category = CategoryService().get_category_by_name(post.category)
+        # 分类不存在（当分类不存在时添加）
+        if not category:
+            category = self.add_category(post.category)
+
         post.category = category
         # 添加文章到分类文章集合
         CategoryService().add_to_category(category, post.id)

@@ -63,10 +63,6 @@ class CategoryService:
         """
         id = self.r.get(db.STR_CATEGORY_NAME_TO_ID % name)
 
-        # 分类不存在
-        if not id:
-            id = self.add_category(name)
-
         return id
 
 
