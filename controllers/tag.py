@@ -18,7 +18,7 @@ class tag:
         list_post_ids = TagService().get_post_ids_by_tag(id, page)
         list_post = PostService().get_posts_by_ids(list_post_ids, ret_type)
         params = Param(current_page=int(page), post_list=list_post, title=name, special=name)
-        if ret_type:
+        if int(ret_type):
             return json.dumps(list_post)
         else:
             return base_render.category(params)

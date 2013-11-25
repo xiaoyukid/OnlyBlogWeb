@@ -74,7 +74,7 @@ class PostService:
             post = Post(id=id, title=dic_post[db.H_POST_TITLE], content=dic_post[db.H_POST_CONTENT],
                         pub_date=dic_post[db.H_POST_PUB_DATE], category=category, tags=tags)
 
-            if ret_type:
+            if int(ret_type):
                 post = post.__dict__
             post_list.append(post)
 
