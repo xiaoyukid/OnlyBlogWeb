@@ -117,7 +117,7 @@ class PostService:
         category = CategoryService().get_category_by_name(post.category)
         # 分类不存在（当分类不存在时添加）
         if not category:
-            category = self.add_category(post.category)
+            category = CategoryService().add_category(post.category)
 
         post.category = category
         # 添加文章到分类文章集合
